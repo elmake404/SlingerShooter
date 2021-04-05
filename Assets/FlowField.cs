@@ -5,13 +5,13 @@ using UnityEngine;
 
 public class FlowField
 {
-    public Cell[,] grid { get; private set; }
-    public Vector2Int gridSize { get; private set; }
+    public Cell[,] grid { get; set; }
+    public Vector2Int gridSize { get; set; }
     public float cellRadius { get; private set; }
     public Cell destinationCell;
 
     private float cellDiameter;
-    private Vector3 offsetGrid;
+    public Vector3 offsetGrid;
     //private Vector3 curFieldPos;
 
     public FlowField(float _cellRadius, Vector2Int _gridSize, Vector3 _offsetGrid)
@@ -58,6 +58,21 @@ public class FlowField
                     curCell.IncreaseCost(3);
                     hasIncreasedCost = true;
                 }
+            }
+        }
+    }
+
+    public void ChangeCostFieldForAvoidOther(List<Cell> cellToAvoid)
+    {
+        for (int i = 0; i < cellToAvoid.Count; i++)
+        {
+            Vector2Int gridPosOtherClassField = cellToAvoid[i].gridIndex;
+            Cell currentCell = grid[gridPosOtherClassField.x, gridPosOtherClassField.y];
+            currentCell.IncreaseCost(255);
+            List<Cell> neighboursCell = GetNeighborCells(gridPosOtherClassField, GridDirection.CardinalDirections);
+            for (int k = 0; k < neighboursCell.Count; k++)
+            {
+                neighboursCell[k].IncreaseCost(255);
             }
         }
     }

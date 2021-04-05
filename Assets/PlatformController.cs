@@ -8,6 +8,7 @@ public class PlatformController : MonoBehaviour
     public GridController gridController;
     public EnemyController enemyController;
     private Queue<Transform> queueSpawnPoints;
+    
 
     private void OnEnable()
     {

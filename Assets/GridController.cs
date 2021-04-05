@@ -9,6 +9,7 @@ public class GridController : MonoBehaviour
     public float cellRadius = 0.5f;
     public FlowField curFlowField;
     public GameObject target;
+    public Cell targetCell;
     private PlatformController platformController;
     //public GridDebug gridDebug;
 
@@ -26,12 +27,13 @@ public class GridController : MonoBehaviour
         curFlowField.CreateCostField();
         Cell destinationCell = curFlowField.GetCellFromWorldPos(target.transform.position);
         curFlowField.CreateIntegrationField(destinationCell);
+        targetCell = destinationCell;
         curFlowField.CreateFlowField();
         platformController.enemyController.currentFlowField = curFlowField;
     }
 
 
-    private void OnDrawGizmos()
+    /*private void OnDrawGizmos()
     {
         if (curFlowField == null) { return; }
         DrawGrid(gridSize, Color.green, cellRadius);
@@ -58,7 +60,7 @@ public class GridController : MonoBehaviour
                 Gizmos.DrawWireCube(center, size);
             }
         }
-    }
+    }*/
 
     private Vector3 GetOffsetToFlowField()
     {

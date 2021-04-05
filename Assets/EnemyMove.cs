@@ -1,35 +1,78 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+
+public enum EnemyMoveState
+{
+    enemyRunToTarget = 0,
+    enemyAvoidOther = 1,
+    enemyFindPlayer = 2
+}
 
 public class EnemyMove : MonoBehaviour
 {
     [HideInInspector]public FlowField targetFlowField;
+    [HideInInspector]public UsedCells ownUsedCells;
+    private FlowField avoidFlowField;
     private Cell currentCell;
-    private float minDistance = 1f;
+    private Cell previousCell;
+    public Cell targetCell;
+    private float minDistanceToTarget = 3f;
+    private float minDistanceToOther = 8f;
     private float moveTowardsSpeed = 50f;
     private float rotateTowardsSpeed = 2f;
     private float currentVelocity = 0f;
     private Vector3 lastTransformPos;
-    
+    private EnemyMoveState moveState = EnemyMoveState.enemyRunToTarget;
+    private Coroutine waitToNearObjects;
+    bool isEnemyFindPlayer = false;
+
 
     private void OnEnable()
     {
+        
         lastTransformPos = Vector3.zero;
+    }
+
+    private void Start()
+    {
+        
+        waitToNearObjects = StartCoroutine(WaitToAvoidAnother());
+        StartCoroutine(WaitToFindPlayer());
     }
 
     private void FixedUpdate()
     {
-        SetCurrentVelocity();
-        SetCurrentCell();
-        MoveEnemy();
-        RotateEnemy();
+        MoveState(moveState);
+        
     }
 
-    private void Update()
-    {
 
-        //transform.position += moveVelocity*Time.deltaTime;
+    private void MoveState(EnemyMoveState enemyMoveState)
+    {
+        switch (enemyMoveState)
+        {
+            case EnemyMoveState.enemyRunToTarget:
+                CalculateDistanceToTarget();
+                SetCurrentVelocity();
+                SetCurrentCell(targetFlowField);
+                WorkWithCellsToUsed();
+                MoveEnemy();
+                RotateEnemy();
+                break;
+
+            case EnemyMoveState.enemyAvoidOther:
+                CalculateDistanceToTarget();
+                SetCurrentVelocity();
+                SetCurrentCell(avoidFlowField);
+                WorkWithCellsToUsed();
+                MoveEnemy();
+                RotateEnemy();
+                break;
+            case EnemyMoveState.enemyFindPlayer:
+                break;
+        }
     }
 
     private void MoveEnemy()
@@ -37,14 +80,11 @@ public class EnemyMove : MonoBehaviour
         Vector3 startDirection = transform.forward;
         Vector3 targetPos = 2f*transform.forward;
         float percentOfDistance = 1f;
-        float distanceToTarget = Vector3.Distance(transform.position, targetFlowField.destinationCell.worldPos);
         
-        if (distanceToTarget < minDistance + 1f)
-        {
-            percentOfDistance = Mathf.InverseLerp(minDistance, minDistance + 1f, distanceToTarget);
-        }
         transform.position += Vector3.MoveTowards(startDirection, targetPos, moveTowardsSpeed * Time.deltaTime) * percentOfDistance*Time.deltaTime;
-    }   
+    }  
+    
+
 
     private void RotateEnemy()
     {
@@ -55,17 +95,103 @@ public class EnemyMove : MonoBehaviour
         
     }
 
-    private void SetCurrentCell()
+    private void SetCurrentCell(FlowField selectedFlowField)
     {
-        currentCell = targetFlowField.GetCellFromWorldPos(transform.position);
+        currentCell = selectedFlowField.GetCellFromWorldPos(transform.position);
+    }
+
+    private void WorkWithCellsToUsed()
+    {
+        if (previousCell != currentCell)
+        {
+            ownUsedCells.AddCellToUsed(currentCell);
+            ownUsedCells.RemoveCellFromUsed(previousCell);
+            previousCell = currentCell;
+        }
     }
 
     private void SetCurrentVelocity()
     {
         float velocity = Vector3.Distance(Vector3.zero, (transform.position - lastTransformPos)) / Time.deltaTime;
         currentVelocity = velocity;
-        Debug.Log(velocity);
         lastTransformPos = transform.position;
         
+    }
+
+    private void CalculateDistanceToTarget()
+    {
+        float distance = Vector3.Distance(transform.position, targetFlowField.destinationCell.worldPos);
+        
+        if (distance < minDistanceToTarget)
+        {
+            isEnemyFindPlayer = true;
+
+        }
+    }
+
+    private List<Cell> GetNearCells(out bool isAvoid)
+    {
+        isAvoid = false;
+        List<Cell> cellToAvoid = new List<Cell>();
+        if (ownUsedCells == null) { return null; }
+        List<Cell> usedList = ownUsedCells.usedCells;
+
+        for (int i = 0; i < usedList.Count; i++)
+        {
+            if (Vector3.Distance(transform.position, usedList[i].worldPos) < minDistanceToOther)
+            {
+                isAvoid = true;
+                cellToAvoid.Add(usedList[i]);
+            }
+        }
+        List<Cell> cellsToReturn = new List<Cell>();
+        if (isAvoid == false)
+        {
+            return null;
+        }
+        else
+        {
+            
+            return cellToAvoid;
+            
+        }
+    }
+
+    private void GenerateToAvoidFlowField(List<Cell> cellToAvoid)
+    {
+        float cellRadius = targetFlowField.cellRadius;
+        Vector2Int gridSize = targetFlowField.gridSize;
+        Vector3 offsetGrid = targetFlowField.offsetGrid;
+
+        avoidFlowField = new FlowField(cellRadius, gridSize, offsetGrid);
+        avoidFlowField.CreateGrid();
+        avoidFlowField.CreateCostField();
+        avoidFlowField.ChangeCostFieldForAvoidOther(cellToAvoid);
+        avoidFlowField.CreateIntegrationField(targetCell);
+        avoidFlowField.CreateFlowField();
+    }
+
+    private IEnumerator WaitToFindPlayer()
+    {
+        
+        yield return new WaitWhile(()=> isEnemyFindPlayer == false);
+        StopCoroutine(waitToNearObjects);
+        moveState = EnemyMoveState.enemyFindPlayer;
+        
+        yield return null;
+    }
+
+    private IEnumerator WaitToAvoidAnother()
+    {
+        bool isAvoid = false;
+        List<Cell> nearCells = GetNearCells(out isAvoid);
+        yield return new WaitWhile(()=> isAvoid == false);
+        GenerateToAvoidFlowField(nearCells);
+        moveState = EnemyMoveState.enemyAvoidOther;
+        yield return new WaitForSeconds(3f);
+        moveState = EnemyMoveState.enemyRunToTarget;
+        waitToNearObjects = StartCoroutine(WaitToAvoidAnother());
+       
+        yield return null;
     }
 }

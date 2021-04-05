@@ -393,6 +393,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: PoolGameObjects
       objectReference: {fileID: 0}
+    - target: {fileID: 1996907028720701659, guid: a220be6bea7937b4fa4219ea96e8b95b,
+        type: 3}
+      propertyPath: pooledGameobjects.Array.data[0].numInstance
+      value: 10
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a220be6bea7937b4fa4219ea96e8b95b, type: 3}
 --- !u!1001 &4181023103799743980
