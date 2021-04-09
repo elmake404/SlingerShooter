@@ -8,8 +8,12 @@ public class PlatformController : MonoBehaviour
     public GridController gridController;
     public EnemyController enemyController;
     private Queue<Transform> queueSpawnPoints;
-    
+    [HideInInspector] public CameraControll playerCamera;
 
+    private void Awake()
+    {
+        playerCamera = FindObjectOfType<CameraControll>();
+    }
     private void OnEnable()
     {
         queueSpawnPoints = new Queue<Transform>();

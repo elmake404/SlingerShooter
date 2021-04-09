@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: fb7bd4a2983a657469c1252602ef140d
+guid: 12c28c734ff602f48924ccab575ab427
 ModelImporter:
   serializedVersion: 19301
   internalIDToNameTable:
@@ -39,14 +39,14 @@ ModelImporter:
       takeName: CINEMA_4D_Main
       internalID: 0
       firstFrame: 0
-      lastFrame: 35
+      lastFrame: 17
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
       cycleOffset: 0
       loop: 0
       hasAdditiveReferencePose: 0
-      loopTime: 1
+      loopTime: 0
       loopBlend: 0
       loopBlendOrientation: 0
       loopBlendPositionY: 0
@@ -93,13 +93,13 @@ ModelImporter:
     secondaryUVPackMargin: 4
     useFileScale: 1
   tangentSpace:
-    normalSmoothAngle: 60
-    normalImportMode: 0
-    tangentImportMode: 3
-    normalCalculationMode: 4
+    normalSmoothAngle: 20
+    normalImportMode: 1
+    tangentImportMode: 2
+    normalCalculationMode: 3
     legacyComputeAllNormalsFromSmoothingGroupsWhenMeshHasBlendShapes: 0
     blendShapeNormalImportMode: 1
-    normalSmoothingSource: 0
+    normalSmoothingSource: 2
   referencedClips: []
   importAnimation: 1
   humanDescription:

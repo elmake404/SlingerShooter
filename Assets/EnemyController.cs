@@ -7,7 +7,9 @@ public class EnemyController : MonoBehaviour
     private PlatformController platformController;
     [HideInInspector] public FlowField currentFlowField;
     public static UsedCells createdUsedCells;
+    public GameObject enemy1;
     private Cell targetCell;
+    private CameraControll playerCamera;
 
     private void OnEnable()
     {
@@ -19,6 +21,7 @@ public class EnemyController : MonoBehaviour
         createdUsedCells = new UsedCells();
         createdUsedCells.usedCells = new List<Cell>();
         platformController = transform.parent.GetComponent<PlatformController>();
+        playerCamera = platformController.playerCamera;
         targetCell = platformController.gridController.targetCell;
         StartCoroutine(PeriodicSpawnEnemy());
     }
@@ -26,19 +29,16 @@ public class EnemyController : MonoBehaviour
     private IEnumerator PeriodicSpawnEnemy()
     {
         yield return new WaitForSeconds(1f);
-        for (int i = 0; i < 9; i++)
+        for (int i = 0; i < 10; i++)
         {
-            GameObject newEnemy = PoolGameObjects.poolGameObjects.GetObjectInPool(PooledItemID.enemy1);
-            if (newEnemy != null)
-            {
+            GameObject newEnemy = Instantiate(enemy1);
                 EnemyMove enemyMove = newEnemy.GetComponent<EnemyMove>();
                 enemyMove.targetCell = targetCell;
                 enemyMove.targetFlowField = currentFlowField;
                 enemyMove.ownUsedCells = createdUsedCells;
+                enemyMove.playerCamera = playerCamera;
                 newEnemy.transform.position = platformController.GetSpawnPoint().position;
-                
-
-            }
+            
             
             yield return new WaitForSeconds(1f);
         }
