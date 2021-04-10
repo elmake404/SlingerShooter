@@ -6,10 +6,13 @@ public class EnemyController : MonoBehaviour
 {
     private PlatformController platformController;
     [HideInInspector] public FlowField currentFlowField;
+    [HideInInspector] public bool isWaitFighters = false;
     public static UsedCells createdUsedCells;
     public GameObject enemy1;
     private Cell targetCell;
     private CameraControll playerCamera;
+    public List<int> enemiesThatFight;
+    private List<int> enemiesThatWantFight;
 
     private void OnEnable()
     {
@@ -18,6 +21,8 @@ public class EnemyController : MonoBehaviour
 
     private void Start()
     {
+        enemiesThatFight = new List<int>();
+        enemiesThatWantFight = new List<int>();
         createdUsedCells = new UsedCells();
         createdUsedCells.usedCells = new List<Cell>();
         platformController = transform.parent.GetComponent<PlatformController>();
@@ -29,23 +34,69 @@ public class EnemyController : MonoBehaviour
     private IEnumerator PeriodicSpawnEnemy()
     {
         yield return new WaitForSeconds(1f);
-        for (int i = 0; i < 10; i++)
+        for (int i = 0; i < 20; i++)
         {
             GameObject newEnemy = Instantiate(enemy1);
-                EnemyMove enemyMove = newEnemy.GetComponent<EnemyMove>();
-                enemyMove.targetCell = targetCell;
-                enemyMove.targetFlowField = currentFlowField;
-                enemyMove.ownUsedCells = createdUsedCells;
-                enemyMove.playerCamera = playerCamera;
-                newEnemy.transform.position = platformController.GetSpawnPoint().position;
+            EnemyMove enemyMove = newEnemy.GetComponent<EnemyMove>();
+            enemyMove.enemyController = this;
+            enemyMove.targetCell = targetCell;
+            enemyMove.targetFlowField = currentFlowField;
+            enemyMove.ownUsedCells = createdUsedCells;
+            enemyMove.playerCamera = playerCamera;
+            newEnemy.transform.position = platformController.GetSpawnPoint().position;
             
-            
-            yield return new WaitForSeconds(1f);
+            yield return new WaitForSeconds(3f);
         }
 
         yield return null;
     }
 
+    public void AddEnemyToFightQueue(int hashObject)
+    {
+        if (enemiesThatFight.Count >= 2)
+        {
+            enemiesThatWantFight.Add(hashObject);
+        }
+        else
+        {
+            enemiesThatFight.Add(hashObject);
+        }
+        //Debug.Log("Count enemies that fight " + enemiesThatFight.Count);
+        //Debug.Log("Count enemies that wait fight " + enemiesThatWantFight.Count);
+    }
 
+    public void RemoveKilledEnemyOnFight(int hashObject)
+    {
+        if (enemiesThatFight.Remove(hashObject))
+        {
+            //Debug.Log("Remove enemiesThatFight " + enemiesThatFight.Count);
+            JoinWaitingEnemyToFight();
+            
+            
+        }
+        else if (enemiesThatWantFight.Remove(hashObject))
+        {
+            //Debug.Log("Remove enemiesThatWait");
+            //Debug.Log(enemiesThatWantFight.Count);
+        }
+    }
 
+    private void JoinWaitingEnemyToFight()
+    {
+        if (enemiesThatWantFight.Count == 0) { return; }
+        enemiesThatFight.Add(enemiesThatWantFight[0]);
+        enemiesThatWantFight.Remove(enemiesThatWantFight[0]);
+    }
+
+    public bool EnemyIsOnFight(int hashObject)
+    {
+        if (enemiesThatFight.Contains(hashObject))
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
 }

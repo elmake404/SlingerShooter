@@ -4,10 +4,13 @@ using UnityEngine;
 
 public class EnemyActionCollider : MonoBehaviour
 {
+    private int layerMaskEnemy;
     private Collider thisColider;
 
     private void Start()
     {
+        layerMaskEnemy = LayerMask.NameToLayer("Enemy");
+        //Debug.Log(layerMaskEnemy);
         thisColider = GetComponent<Collider>();
     }
     public void DisableActionCollider()
@@ -19,4 +22,8 @@ public class EnemyActionCollider : MonoBehaviour
     {
         thisColider.enabled = true;
     }
+
+
+
+   
 }

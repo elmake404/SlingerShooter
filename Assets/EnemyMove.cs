@@ -9,7 +9,8 @@ public enum EnemyMoveState
     enemyAvoidOther = 1,
     enemyFindPlayer = 2,
     enemyAttack = 3, 
-    enemyDeath = 4
+    enemyDeath = 4,
+    enemyIdle = 5
 }
 
 public class EnemyMove : MonoBehaviour
@@ -18,10 +19,13 @@ public class EnemyMove : MonoBehaviour
     [HideInInspector]public UsedCells ownUsedCells;
     private FlowField avoidFlowField;
     private EnemyAnimation enemyAnimation;
+    [HideInInspector] public EnemyController enemyController;
+    public EnemyActionCollider enemyActionCollider;
     private Cell currentCell;
     private Cell previousCell;
     public Cell targetCell;
-    public CameraControll playerCamera;
+    [HideInInspector] public CameraControll playerCamera;
+    private int currentHash;
     private float percentOfDistance = 1f;
     private float minDistanceToTarget = 3f;
     private float minDistanceToOther = 8f;
@@ -33,6 +37,7 @@ public class EnemyMove : MonoBehaviour
     private Coroutine waitToNearObjects;
     bool isEnemyFindPlayer = false;
     bool isDeath = false;
+    bool isEnemyToFight = false;
 
 
     private void OnEnable()
@@ -43,18 +48,19 @@ public class EnemyMove : MonoBehaviour
 
     private void Start()
     {
+        currentHash = gameObject.GetHashCode();
         enemyAnimation = GetComponent<EnemyAnimation>();
         waitToNearObjects = StartCoroutine(WaitToAvoidAnother());
         StartCoroutine(WaitToFindPlayer());
+        StartCoroutine(WaitMoveStateEnemyDeath());
+        StartCoroutine(WaitMoveStateFindPlayer());
+
     }
 
     private void FixedUpdate()
     {
-        
-        MoveState(moveState);
-        
+        MoveState(moveState);   
     }
-
 
     private void MoveState(EnemyMoveState enemyMoveState)
     {
@@ -80,28 +86,47 @@ public class EnemyMove : MonoBehaviour
                 break;
 
             case EnemyMoveState.enemyFindPlayer:
+                enemyAnimation.ChangeAnimationState(AnimatorEnemyState.walk);
                 MoveEnemy();
                 RotateEnemyToPlayer();
                 break;
 
             case EnemyMoveState.enemyAttack:
+                enemyAnimation.ChangeAnimationState(AnimatorEnemyState.attack);
+                RotateEnemyToPlayer();
                 break;
+ 
             case EnemyMoveState.enemyDeath:
-                StopAllCoroutines();
+                break;
+
+            case EnemyMoveState.enemyIdle:
+                RotateEnemyToPlayer();
+                WaitToFight();
+
                 break;
         }
     }
 
     private void MoveEnemy()
     {
+        
         Vector3 startDirection = transform.forward;
         Vector3 targetPos = 2f*transform.forward;
         
         if (moveState == EnemyMoveState.enemyFindPlayer)
         {
+
+            if (enemyController.EnemyIsOnFight(currentHash) != true)
+            {
+                    moveState = EnemyMoveState.enemyIdle;
+                    enemyAnimation.ChangeAnimationState(AnimatorEnemyState.idle);
+                    return;
+            }
+
+            enemyAnimation.ChangeAnimationState(AnimatorEnemyState.walk);
             float distanceToTarget = Vector3.Distance( new Vector3(playerCamera.transform.position.x,0f, playerCamera.transform.position.z), transform.position);
             percentOfDistance = Mathf.InverseLerp(2f, minDistanceToTarget, distanceToTarget);
-            
+
             if (percentOfDistance < 0.3f)
             {
                 enemyAnimation.ChangeAnimationState(AnimatorEnemyState.attack);
@@ -110,11 +135,11 @@ public class EnemyMove : MonoBehaviour
                 enemyAnimation.ChangeAnimationState(AnimatorEnemyState.attack);
             }
         }
+
         transform.position += Vector3.MoveTowards(startDirection, targetPos, moveTowardsSpeed * Time.deltaTime) * percentOfDistance * Time.deltaTime;
+        
     }  
     
-
-
     private void RotateEnemyInCellDirect()
     {
         Vector3 diretionToRotate = new Vector3(Mathf.MoveTowards(transform.forward.x ,currentCell.bestDirection.Vector.x, rotateTowardsSpeed * Time.deltaTime), transform.position.y,Mathf.MoveTowards (transform.forward.z, currentCell.bestDirection.Vector.y,rotateTowardsSpeed * Time.deltaTime));
@@ -150,7 +175,6 @@ public class EnemyMove : MonoBehaviour
         float velocity = Vector3.Distance(Vector3.zero, (transform.position - lastTransformPos)) / Time.deltaTime;
         currentVelocity = velocity;
         lastTransformPos = transform.position;
-        
     }
 
     private void CalculateDistanceToTarget()
@@ -186,9 +210,17 @@ public class EnemyMove : MonoBehaviour
         }
         else
         {
-            
             return cellToAvoid;
             
+        }
+    }
+
+    private void WaitToFight()
+    {
+        if (enemyController.EnemyIsOnFight(currentHash) == true)
+        {
+            moveState = EnemyMoveState.enemyFindPlayer;
+            isEnemyToFight = true;
         }
     }
 
@@ -231,8 +263,25 @@ public class EnemyMove : MonoBehaviour
         yield return null;
     }
 
-    private void OnDisable()
+    private IEnumerator WaitMoveStateFindPlayer()
     {
+        yield return new WaitWhile(() => moveState != EnemyMoveState.enemyFindPlayer);
+        enemyController.AddEnemyToFightQueue(currentHash);
+        yield return null;
+    }
+
+    private IEnumerator WaitMoveStateEnemyDeath()
+    {
+        yield return new WaitWhile(() => moveState != EnemyMoveState.enemyDeath);
+        //Debug.Log("isDeath");
+        enemyController.RemoveKilledEnemyOnFight(currentHash);
+        yield return null;
+    }
+
+    private void OnDestroy()
+    {
+        ownUsedCells.RemoveCellFromUsed(previousCell);
+        ownUsedCells.RemoveCellFromUsed(currentCell);
         StopAllCoroutines();
     }
 }

@@ -7,12 +7,14 @@ public enum AnimatorEnemyState
     run,
     attack,
     walk,
+    idle
 }
 
 public class EnemyAnimation : MonoBehaviour
 {
     private int walkHash;
     private int attackHash;
+    private int idleHash;
     private Animator animator;
     private AnimatorEnemyState animatorState;
 
@@ -20,6 +22,7 @@ public class EnemyAnimation : MonoBehaviour
     {
         animator = GetComponent<Animator>();
         walkHash = Animator.StringToHash("isWalk");
+        idleHash = Animator.StringToHash("isIdle");
         attackHash = Animator.StringToHash("isAttack");
     }
     private void SetAttackAnimation()
@@ -37,9 +40,13 @@ public class EnemyAnimation : MonoBehaviour
                 animator.SetBool(attackHash, true);
                 break;
             case AnimatorEnemyState.walk:
+                animator.SetBool(idleHash, false);
                 animator.SetBool(walkHash, true);
                 break;
-            
+            case AnimatorEnemyState.idle:
+                animator.SetBool(idleHash, true);
+                break;
+
         }
     }
 
