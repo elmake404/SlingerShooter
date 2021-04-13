@@ -273,8 +273,9 @@ public class EnemyMove : MonoBehaviour
     private IEnumerator WaitMoveStateEnemyDeath()
     {
         yield return new WaitWhile(() => moveState != EnemyMoveState.enemyDeath);
-        //Debug.Log("isDeath");
+        enemyController.AddEnemyToDeadList();
         enemyController.RemoveKilledEnemyOnFight(currentHash);
+        StopAllCoroutines();
         yield return null;
     }
 

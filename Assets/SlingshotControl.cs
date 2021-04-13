@@ -33,7 +33,7 @@ public class SlingshotControl : MonoBehaviour
 
     private void RotateToDirection()
     {
-        if (ScreenControl.inputVelocity == 0f)
+        if (ScreenControl.inputVelocity <= 0.05f)
         { return; }
         float yNegative = targetControl.directionRayTarget.direction.y / Mathf.Abs( targetControl.directionRayTarget.direction.y);
         float xNegative = targetControl.directionRayTarget.direction.x / Mathf.Abs( targetControl.directionRayTarget.direction.x);

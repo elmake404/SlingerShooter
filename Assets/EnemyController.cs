@@ -13,11 +13,8 @@ public class EnemyController : MonoBehaviour
     private CameraControll playerCamera;
     public List<int> enemiesThatFight;
     private List<int> enemiesThatWantFight;
-
-    private void OnEnable()
-    {
-        
-    }
+    private int numOfSpawnEnemies = 5;
+    private int numOfDeadEnemies = 0;
 
     private void Start()
     {
@@ -34,7 +31,7 @@ public class EnemyController : MonoBehaviour
     private IEnumerator PeriodicSpawnEnemy()
     {
         yield return new WaitForSeconds(1f);
-        for (int i = 0; i < 20; i++)
+        for (int i = 0; i < numOfSpawnEnemies; i++)
         {
             GameObject newEnemy = Instantiate(enemy1);
             EnemyMove enemyMove = newEnemy.GetComponent<EnemyMove>();
@@ -44,10 +41,9 @@ public class EnemyController : MonoBehaviour
             enemyMove.ownUsedCells = createdUsedCells;
             enemyMove.playerCamera = playerCamera;
             newEnemy.transform.position = platformController.GetSpawnPoint().position;
-            
-            yield return new WaitForSeconds(3f);
+            yield return new WaitForSeconds(2f);
         }
-
+        
         yield return null;
     }
 
@@ -61,23 +57,16 @@ public class EnemyController : MonoBehaviour
         {
             enemiesThatFight.Add(hashObject);
         }
-        //Debug.Log("Count enemies that fight " + enemiesThatFight.Count);
-        //Debug.Log("Count enemies that wait fight " + enemiesThatWantFight.Count);
     }
 
     public void RemoveKilledEnemyOnFight(int hashObject)
     {
         if (enemiesThatFight.Remove(hashObject))
         {
-            //Debug.Log("Remove enemiesThatFight " + enemiesThatFight.Count);
             JoinWaitingEnemyToFight();
-            
-            
         }
         else if (enemiesThatWantFight.Remove(hashObject))
         {
-            //Debug.Log("Remove enemiesThatWait");
-            //Debug.Log(enemiesThatWantFight.Count);
         }
     }
 
@@ -97,6 +86,15 @@ public class EnemyController : MonoBehaviour
         else
         {
             return false;
+        }
+    }
+
+    public void AddEnemyToDeadList()
+    {
+        numOfDeadEnemies += 1;
+        if (numOfSpawnEnemies == numOfDeadEnemies)
+        {
+            platformController.TimeToLeavePlatform();
         }
     }
 }

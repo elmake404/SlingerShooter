@@ -8,19 +8,18 @@ public class GridController : MonoBehaviour
     public Vector2Int gridSize;
     public float cellRadius = 0.5f;
     public FlowField curFlowField;
-    public GameObject target;
+    [HideInInspector] public Transform target;
     public Cell targetCell;
     private PlatformController platformController;
-    //public GridDebug gridDebug;
 
     private void InitializeFlowField()
     {
         curFlowField = new FlowField(cellRadius, gridSize, GetOffsetToFlowField());
         curFlowField.CreateGrid();
-        
+
     }
 
-    private void OnEnable()
+    private void Start()
     {
         platformController = transform.parent.GetComponent<PlatformController>();
         InitializeFlowField();
@@ -29,7 +28,8 @@ public class GridController : MonoBehaviour
         curFlowField.CreateIntegrationField(destinationCell);
         targetCell = destinationCell;
         curFlowField.CreateFlowField();
-        platformController.enemyController.currentFlowField = curFlowField;
+        platformController.currentFlowField = curFlowField;
+        //platformController.enemyController.currentFlowField = curFlowField;  ///!!!!
     }
 
 
