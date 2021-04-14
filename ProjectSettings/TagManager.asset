@@ -5,6 +5,8 @@ TagManager:
   serializedVersion: 2
   tags:
   - firstPoint
+  - enemy1
+  - barrel
   layers:
   - Default
   - TransparentFX

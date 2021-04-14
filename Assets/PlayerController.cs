@@ -17,12 +17,15 @@ public class PlayerController : MonoBehaviour
     [HideInInspector] public PlayerState playerState;
     [HideInInspector] public Camera mainCamera;
     [HideInInspector] public CatmulSpline currentSpline;
-    private LayerMask enemyLayerMask;
+    private LayerMask enemyLayer;
+    private LayerMask impossibleLayer;
     private GameObject currentTargetedEnemy;
+    private GameObject currentTargetedBarrel;
     private float travelLength;
     private float velocityMove;
     private float damping = 12f;
     private float maxSpeed = 1f;
+    private bool isTargetOnEnemy = false;
     //private bool isPlayerAiming = false;
 
     private void Awake()
@@ -35,9 +38,10 @@ public class PlayerController : MonoBehaviour
 
     private void Start()
     {
-        enemyLayerMask = LayerMask.NameToLayer("Enemy");
+        enemyLayer = LayerMask.NameToLayer("Enemy");
+        impossibleLayer = LayerMask.NameToLayer("Impossible");
         playerState = PlayerState.playerIsShooting;
-        Debug.Log(enemyLayerMask);
+        Debug.Log(enemyLayer);
     }
 
     private void Update()
@@ -72,17 +76,32 @@ public class PlayerController : MonoBehaviour
         RaycastHit raycastHit;
         if (Physics.Raycast(ray, out raycastHit, 100f))
         {
-            if (raycastHit.transform.gameObject.layer == enemyLayerMask)
+            int raycastedLayer = raycastHit.transform.gameObject.layer;
+            if (raycastedLayer == enemyLayer)
             {
                 currentTargetedEnemy = raycastHit.transform.gameObject;
+                isTargetOnEnemy = true;
+            }
+            else if (raycastedLayer == impossibleLayer)
+            {
+                if(raycastHit.transform.tag == "barrel")
+                {
+                    //raycastHit.transform.GetComponent<BarrelExplosionControl>().MakeBarrelExplosion();
+                    SetTargetedBarrel(raycastHit.transform.gameObject);
+                    isTargetOnEnemy = true;
+                }
             }
             else
             {
+                isTargetOnEnemy = false;
+                currentTargetedBarrel = null;
                 currentTargetedEnemy = null;
             }
         }
         else
         {
+            isTargetOnEnemy = false;
+            currentTargetedBarrel = null;
             currentTargetedEnemy = null;
         }
 
@@ -96,6 +115,23 @@ public class PlayerController : MonoBehaviour
         currentEnemyControl.InitDeathThisGuy(targetSlingshotControl.directionRayTarget);
     }
 
+    public void SetTargetedBarrel(GameObject barrelToSet)
+    {
+        if (currentTargetedBarrel != null) { return; }
+        else
+        {
+            currentTargetedBarrel = barrelToSet;
+        }
+        
+    }
+
+    public void ShootOnBarrel()
+    {
+        if (currentTargetedBarrel == null) { return; }
+        currentTargetedBarrel.GetComponent<BarrelExplosionControl>().MakeBarrelExplosion();
+
+    }
+
     public void StartMovePlayer()
     {
         StartCoroutine(DelayStartMovePlayer());
@@ -106,7 +142,7 @@ public class PlayerController : MonoBehaviour
         if (ScreenControl.inputVelocity > 0f)
         {
             animationSlingControl.SetAnimationPuling();
-            if (currentTargetedEnemy != null)
+            if (isTargetOnEnemy != false)
             {
                 targetSlingshotControl.controlState = TargetControlState.targetIsOnEnemy;
             }

@@ -61,7 +61,9 @@ public class TargetSlingshotControl : MonoBehaviour
 
                 break;
             case TargetControlState.targetIsNonActive:
+                MoveTarget();
                 SetColorWhenTargetIsNonActive();
+                
                 break;
             case TargetControlState.targetIsOnEnemy:
                 MoveTarget();
@@ -75,6 +77,7 @@ public class TargetSlingshotControl : MonoBehaviour
     private void MoveTarget()
     {
         rectTransform.position += new Vector3(ScreenControl.inputDirection.x, ScreenControl.inputDirection.y, 0f)  * Time.deltaTime * ScreenControl.inputVelocity/speedDecreased;
+        //rectTransform.position = Vector3.MoveTowards(rectTransform.position, initialPos, 300f*Time.deltaTime);
     }
 
     private void GenerateRayFromTarget()

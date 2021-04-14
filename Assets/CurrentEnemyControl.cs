@@ -12,7 +12,8 @@ public class CurrentEnemyControl : MonoBehaviour
     private Rigidbody[] rigidbodies;
     private Collider[] colliders;
     private int enemyLayerMask;
-    private Vector3 spawnPos; 
+    private Vector3 spawnPos;
+    private float explosionForce = 20f;
     private void Start()
     {
         spawnPos = transform.position;
@@ -69,6 +70,16 @@ public class CurrentEnemyControl : MonoBehaviour
             StartCoroutine(DisableThisEnemy());
     }
 
+    public void InitDeathOnBarrelExplosion(Vector3 posExplosion)
+    {
+        enemyAnimation.DisableAnimator();
+        enemyMove.moveState = EnemyMoveState.enemyDeath;
+        EnableRagdoll();
+        playerActionCollider.DisableActionCollider();
+        AddExplosionForceToBody(posExplosion);
+        StartCoroutine(DisableThisEnemy());
+    }
+
     private void AddForceToTargetBodyPart(Ray directionToForce)
     {
         RaycastHit hit;
@@ -78,6 +89,14 @@ public class CurrentEnemyControl : MonoBehaviour
         }
         
 
+    }
+
+    private void AddExplosionForceToBody(Vector3 posExplosion)
+    {
+        for (int i = 0; i < rigidbodies.Length; i++)
+        {
+            rigidbodies[i].AddExplosionForce(explosionForce, posExplosion, 4f, 20f, ForceMode.Impulse);
+        }
     }
     
     private IEnumerator DisableThisEnemy()
