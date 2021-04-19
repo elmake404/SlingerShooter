@@ -67,4 +67,6 @@ public class EnemyAnimation : MonoBehaviour
     {
         animator.enabled = true;
     }
+
+    
 }

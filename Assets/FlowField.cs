@@ -52,6 +52,7 @@ public class FlowField
                 if (col.gameObject.layer == 8)
                 {
                     curCell.IncreaseCost(255);
+                    //Debug.Log(col.gameObject.name);
                     continue;
                 }
                 else if (!hasIncreasedCost && col.gameObject.layer == 9)

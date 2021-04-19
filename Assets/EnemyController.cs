@@ -96,5 +96,6 @@ public class EnemyController : MonoBehaviour
         {
             platformController.TimeToLeavePlatform();
         }
+        //Debug.Log("AddEnemyToDeadList");
     }
 }

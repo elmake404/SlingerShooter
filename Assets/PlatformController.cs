@@ -8,6 +8,8 @@ public class PlatformController : MonoBehaviour
     public GridController gridController;
     public EnemyController enemyController;
     public CatmulSpline currentSpline;
+    public TowerControl[] towerControl;
+    public Collider[] barrelsColliderControl;
     private Queue<Transform> queueSpawnPoints;
     [HideInInspector] public ChangePlatformManager changePlatformManager;
     [HideInInspector] public CameraControll playerCamera;
@@ -48,6 +50,9 @@ public class PlatformController : MonoBehaviour
         enemyController.currentFlowField = currentFlowField;
         yield return new WaitForEndOfFrame();
         currentSpline.enabled = true;
+        yield return new WaitForEndOfFrame();
+        InitTowers();
+        InitBarrels();
         yield return null;
     }
 
@@ -55,5 +60,24 @@ public class PlatformController : MonoBehaviour
     {
         changePlatformManager.GiveCommandToPlayer();
         
+    }
+    private void InitTowers()
+    {
+        if (towerControl.Length <= 0) { return; }
+
+        for (int i = 0; i < towerControl.Length; i++)
+        {
+            towerControl[i].enabled = true;
+            towerControl[i].playerCamera = playerCamera;
+        }
+    }
+    private void InitBarrels()
+    {
+        if (barrelsColliderControl.Length <= 0) { return; }
+
+        for (int i = 0; i < barrelsColliderControl.Length; i++)
+        {
+            barrelsColliderControl[i].enabled = true;
+        }
     }
 }

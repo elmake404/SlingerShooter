@@ -83,7 +83,7 @@ public class CurrentEnemyControl : MonoBehaviour
     private void AddForceToTargetBodyPart(Ray directionToForce)
     {
         RaycastHit hit;
-        if (Physics.Raycast(directionToForce, out hit, 10f, enemyLayerMask))
+        if (Physics.Raycast(directionToForce, out hit, 50f, enemyLayerMask))
         {
             hit.collider.attachedRigidbody.AddForce(directionToForce.direction * 100f, ForceMode.Impulse);
         }

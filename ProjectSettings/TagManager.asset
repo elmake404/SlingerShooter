@@ -7,6 +7,9 @@ TagManager:
   - firstPoint
   - enemy1
   - barrel
+  - enemy2
+  - enemy3
+  - enemy4
   layers:
   - Default
   - TransparentFX
@@ -19,8 +22,8 @@ TagManager:
   - Impossible
   - Enemy
   - EnemyRagdoll
-  - 
-  - 
+  - ObjectToDestroy
+  - EnemyShooter
   - 
   - 
   - 

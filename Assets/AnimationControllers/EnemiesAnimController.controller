@@ -77,6 +77,27 @@ AnimatorStateTransition:
   m_InterruptionSource: 0
   m_OrderedInterruption: 1
   m_CanTransitionToSelf: 1
+--- !u!114 &-5679937684942217357
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 522fc64169e616340bfc9fa6d9b0ee25, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animationEvent:
+    m_Time: 0
+    m_FunctionName: 
+    m_StringParameter: 
+    m_ObjectReferenceParameter: {fileID: 0}
+    m_FloatParameter: 0
+    m_IntParameter: 0
+    m_MessageOptions: 0
+    m_Source: 0
 --- !u!1107 &-4890721219152121754
 AnimatorStateMachine:
   serializedVersion: 5
@@ -91,21 +112,21 @@ AnimatorStateMachine:
     m_Position: {x: 110, y: 210, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 7621069915681183670}
-    m_Position: {x: -60, y: 330, z: 0}
+    m_Position: {x: -30, y: 310, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 1643154588311018677}
-    m_Position: {x: 250, y: 330, z: 0}
+    m_Position: {x: 240, y: 310, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -7858187245416562894}
-    m_Position: {x: 250, y: 460, z: 0}
+    m_Position: {x: 240, y: 400, z: 0}
   m_ChildStateMachines: []
   m_AnyStateTransitions: []
   m_EntryTransitions: []
   m_StateMachineTransitions: {}
   m_StateMachineBehaviours: []
-  m_AnyStatePosition: {x: 50, y: 20, z: 0}
-  m_EntryPosition: {x: 50, y: 120, z: 0}
-  m_ExitPosition: {x: 800, y: 120, z: 0}
+  m_AnyStatePosition: {x: 90, y: 40, z: 0}
+  m_EntryPosition: {x: 130, y: 120, z: 0}
+  m_ExitPosition: {x: 490, y: 220, z: 0}
   m_ParentStateMachinePosition: {x: 800, y: 20, z: 0}
   m_DefaultState: {fileID: -4028784012671574785}
 --- !u!1102 &-4028784012671574785
@@ -163,19 +184,19 @@ AnimatorController:
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   - m_Name: isWalk
     m_Type: 4
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   - m_Name: isIdle
     m_Type: 4
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   m_AnimatorLayers:
   - serializedVersion: 5
     m_Name: Base Layer
@@ -261,6 +282,18 @@ AnimatorStateTransition:
   m_InterruptionSource: 0
   m_OrderedInterruption: 1
   m_CanTransitionToSelf: 1
+--- !u!114 &6429674201073707442
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 522fc64169e616340bfc9fa6d9b0ee25, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1102 &7621069915681183670
 AnimatorState:
   serializedVersion: 5

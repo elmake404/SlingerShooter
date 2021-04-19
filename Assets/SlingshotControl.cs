@@ -13,12 +13,37 @@ public class SlingshotControl : MonoBehaviour
     //public Ray rayDirection;
     [HideInInspector] public TargetSlingshotControl targetControl;
     [HideInInspector] public SlinghsotState slinghsotState = SlinghsotState.slingshotIsNonActive;
-    //public Camera sceneCamera;
+    public GameObject projectile;
+    public Transform pointToOffsetProjectile;
+    private Vector3 startPosPointOffset;
+    private Vector3 startPosProjectile;
+
+    private void Start()
+    {
+        startPosPointOffset = pointToOffsetProjectile.position;
+        startPosProjectile = projectile.transform.position;
+    }
 
     private void FixedUpdate()
     {
         SlingshotState(slinghsotState);
+        MoveProjectile();
     }
+
+    private void Update()
+    {
+    }
+
+    private void MoveProjectile()
+    {
+        Vector3 offsetProjectile = startPosPointOffset - pointToOffsetProjectile.position;
+        
+        Vector3 newPos = new Vector3(startPosProjectile.x - offsetProjectile.x, startPosProjectile.y - offsetProjectile.y, startPosProjectile.z - offsetProjectile.z);
+        projectile.transform.position = newPos;
+    }
+
+    
+
     public void SlingshotState(SlinghsotState slinghsotState)
     {
         switch (slinghsotState)
@@ -54,5 +79,7 @@ public class SlingshotControl : MonoBehaviour
 
     }
 
-
+    
 }
+
+

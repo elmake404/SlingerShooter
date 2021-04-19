@@ -20,7 +20,7 @@ public class ChangePlatformManager : MonoBehaviour
         platformsController[0].enabled = true;
         platformsController[0].changePlatformManager = this;
         currentPlatformIndex = 0;
-        //GetFirstPointAtNextPlatform();
+        GetFirstPointAtNextPlatform();
     }
 
     private void EnableNextPlatform()
@@ -39,7 +39,7 @@ public class ChangePlatformManager : MonoBehaviour
         playerController.StartMovePlayer();
         EnableNextPlatform();
     }
-
+    
     private Transform GetFirstPointAtNextPlatform()
     {
         return platformsController[currentPlatformIndex + 1].GetComponentInChildren<CatmulSpline>().transform.GetChild(1);

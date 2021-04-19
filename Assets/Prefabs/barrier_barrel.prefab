@@ -12,8 +12,8 @@ GameObject:
   - component: {fileID: 581953494497247126}
   - component: {fileID: 3456359707296320348}
   - component: {fileID: 3510527414242172265}
-  - component: {fileID: 4892435557681591934}
   - component: {fileID: 5830846117817477133}
+  - component: {fileID: 4892435557681591934}
   m_Layer: 8
   m_Name: barrier_barrel
   m_TagString: barrel
@@ -98,19 +98,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!65 &4892435557681591934
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3816669461938793097}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 0.9999999, y: 1.25, z: 0.9999999}
-  m_Center: {x: -0.000000044703484, y: 0.625, z: 0.000000014901161}
 --- !u!114 &5830846117817477133
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -124,3 +111,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   particles: {fileID: 180702, guid: a7c694f0877ea874fa57e033221095c3, type: 3}
+  layerMask:
+    serializedVersion: 2
+    m_Bits: 6656
+--- !u!65 &4892435557681591934
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3816669461938793097}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 0
+  serializedVersion: 2
+  m_Size: {x: 0.9999999, y: 1.25, z: 0.9999999}
+  m_Center: {x: -0.000000044703484, y: 0.625, z: 0.000000014901161}

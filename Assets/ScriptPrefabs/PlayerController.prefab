@@ -325,7 +325,10 @@ MonoBehaviour:
   slingshotControl: {fileID: 749193892997446455}
   targetSlingshotControl: {fileID: 2372380153783885998}
   animationSlingControl: {fileID: 1901811257228330028}
+  projectileBullet: {fileID: 193226, guid: 2212b39ca2a179f469ce8aef8bba9202, type: 3}
+  playerState: 0
   mainCamera: {fileID: 0}
+  currentSpline: {fileID: 0}
 --- !u!1 &9078132254913737529
 GameObject:
   m_ObjectHideFlags: 0
