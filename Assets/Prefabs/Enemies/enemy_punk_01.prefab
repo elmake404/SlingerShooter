@@ -1754,6 +1754,19 @@ MonoBehaviour:
   enemyMove: {fileID: 7302748867301611411}
   rigCharecter: {fileID: 488936}
   playerActionCollider: {fileID: 4995059817111924833}
+  rightHandContainer: {fileID: 484908}
+  weaponEquipment:
+  - {fileID: 100000, guid: 345a6ff4fb9ff2c43b6730e9277452b5, type: 3}
+  - {fileID: 100000, guid: 84865c3d861c4ef47a9e9feca7fa00d6, type: 3}
+  - {fileID: 100000, guid: 5f8313e9df20da74a9762ba174db94c6, type: 3}
+  - {fileID: 100000, guid: 0bb815189bfbd9b40949a8a13e057756, type: 3}
+  - {fileID: 100000, guid: 17850bdbcc7115146b93b41e218bdc31, type: 3}
+  - {fileID: 100000, guid: 533838b33b1001b4688d1c09b7118840, type: 3}
+  - {fileID: 100000, guid: 785eeef0aafac024c9ce26695e5e074a, type: 3}
+  - {fileID: 100000, guid: 6b3bd6a63c5a6b34288ced6c8614f429, type: 3}
+  - {fileID: 100000, guid: 0aa0e8eb41a336a468c2b10f132c4d4c, type: 3}
+  - {fileID: 100000, guid: a97f51a62eb294a4387e61589ed5a518, type: 3}
+  - {fileID: 100000, guid: 51e89f364e23f6747811695b56002463, type: 3}
 --- !u!114 &7302748867301611411
 MonoBehaviour:
   m_ObjectHideFlags: 0

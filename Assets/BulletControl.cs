@@ -25,6 +25,7 @@ public class BulletControl : MonoBehaviour
 
         if (Vector3.Distance(nextPos, targetPoint) < 0.1f)
         {
+            DamageHits.instance.AddHit();   
             Destroy(gameObject);
         }
     }

@@ -8,10 +8,11 @@ public class EnemyController : MonoBehaviour
     [HideInInspector] public FlowField currentFlowField;
     [HideInInspector] public bool isWaitFighters = false;
     public static UsedCells createdUsedCells;
+    public List<GameObject> weaponEquipment;
     public GameObject enemy1;
     private Cell targetCell;
     private CameraControll playerCamera;
-    public List<int> enemiesThatFight;
+    [HideInInspector] public List<int> enemiesThatFight;
     private List<int> enemiesThatWantFight;
     private int numOfSpawnEnemies = 5;
     private int numOfDeadEnemies = 0;
@@ -34,7 +35,10 @@ public class EnemyController : MonoBehaviour
         for (int i = 0; i < numOfSpawnEnemies; i++)
         {
             GameObject newEnemy = Instantiate(enemy1);
+            CurrentEnemyControl enemyControl = newEnemy.GetComponent<CurrentEnemyControl>();
             EnemyMove enemyMove = newEnemy.GetComponent<EnemyMove>();
+
+            enemyControl.EquipWeapon(GetRandomWeapon());
             enemyMove.enemyController = this;
             enemyMove.targetCell = targetCell;
             enemyMove.targetFlowField = currentFlowField;
@@ -42,6 +46,7 @@ public class EnemyController : MonoBehaviour
             enemyMove.playerCamera = playerCamera;
             newEnemy.transform.position = platformController.GetSpawnPoint().position;
             yield return new WaitForSeconds(2f);
+            yield return new WaitWhile(() => enemiesThatFight.Count > 0);
         }
         
         yield return null;
@@ -68,6 +73,12 @@ public class EnemyController : MonoBehaviour
         else if (enemiesThatWantFight.Remove(hashObject))
         {
         }
+    }
+
+    private GameObject GetRandomWeapon()
+    {
+        int randomIndex = Random.Range(0, weaponEquipment.Count);
+        return weaponEquipment[randomIndex];
     }
 
     private void JoinWaitingEnemyToFight()

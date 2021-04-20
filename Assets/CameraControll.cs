@@ -15,6 +15,7 @@ public class CameraControll : MonoBehaviour
     private Vector3 changedVector;
     private Vector3 velocity;
     private Vector3 savedForvard;
+    private float xRotate;
     private float maxSpeed = 20f;
     private float damping = 10f;
     public PlayerController playerController;
@@ -23,6 +24,7 @@ public class CameraControll : MonoBehaviour
     private Rigidbody cameraRigidbody;
     private SphereCollider cameraCollider;
     private ShakeOffset newShake;
+    public bool isNowShaked = false;
 
     private void Start()
     {
@@ -50,7 +52,7 @@ public class CameraControll : MonoBehaviour
                 break;
 
             case CameraState.playerIsDead:
-                    break;
+                break;
 
             case CameraState.cameraShake:
                 CameraShake();
@@ -70,13 +72,20 @@ public class CameraControll : MonoBehaviour
         cameraCollider.enabled = true;
 
         //Vector3 randomVector = new Vector3(Random.Range(-10f,10f), Random.Range(-10f, 10f), Random.Range(-10f, 10f))/20f;
-        cameraRigidbody.AddTorque(-transform.right + 3f*transform.forward, ForceMode.Impulse );
+        cameraRigidbody.AddTorque(-transform.right + 3f * transform.forward, ForceMode.Impulse );
     }
 
     public void InitCameraShake()
     {
+        if (newShake != null) 
+        {
+            newShake = null;
+        }
+        isNowShaked = true;
         cameraState = CameraState.cameraShake;
-        newShake = new ShakeOffset(transform.rotation.eulerAngles, 0.5f);
+        Vector3 currentRotation = new Vector3(transform.eulerAngles.x, xRotate, transform.eulerAngles.z);
+        newShake = new ShakeOffset(currentRotation, 0.5f);
+        
     }
 
     private void CameraShake()
@@ -85,10 +94,12 @@ public class CameraControll : MonoBehaviour
         {
             cameraState = CameraState.normal;
             newShake = null;
-            Debug.Log("NormalCamera");
+            isNowShaked = false;
+            //Debug.Log("NormalCamera");
             return;
         }
         Vector3 offset = newShake.GetSmoothedEulerAngles();
+        //Debug.Log(offset);
         transform.localRotation = Quaternion.Euler(offset);
 
     }
@@ -96,8 +107,9 @@ public class CameraControll : MonoBehaviour
     private void RotateCamera()
     {
         Vector3 targetRay = targetSlingshotControl.directionRayTarget.direction;
-        float xRotate = Mathf.Atan2(targetRay.x, transform.forward.z) * Mathf.Rad2Deg;
-        transform.rotation = Quaternion.Euler(0f, xRotate / 3f, 0f);
+        xRotate = Mathf.Atan2(targetRay.x, transform.forward.z) * Mathf.Rad2Deg;
+        transform.localRotation = Quaternion.Euler(0f, xRotate / 2, 0f);
+        
     }
     
 }

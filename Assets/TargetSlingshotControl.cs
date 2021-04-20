@@ -7,7 +7,8 @@ public enum TargetControlState
 {
     targetIsActive = 0,
     targetIsNonActive = 1,
-    targetIsOnEnemy = 2
+    targetIsOnEnemy = 2,
+    targetIsNotMove = 3
 }
 
 public class TargetSlingshotControl : MonoBehaviour
@@ -69,6 +70,8 @@ public class TargetSlingshotControl : MonoBehaviour
                 MoveTarget();
                 GenerateRayFromTarget();
                 SetColorWhenTargetEnemy();
+                break;
+            case TargetControlState.targetIsNotMove:
                 break;
         }
         

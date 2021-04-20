@@ -104,6 +104,7 @@ public class PlayerController : MonoBehaviour
                 SetEnemyOnTargetIfItIs(targetSlingshotControl.directionRayTarget);
                 break;
             case PlayerState.playerIsMove:
+                SetStateTargetSlingshotControl();
                 MovePlayerToNextPlatform();
                 break;
             case PlayerState.playerIsDead:
@@ -208,7 +209,10 @@ public class PlayerController : MonoBehaviour
 
     private void SetStateTargetSlingshotControl()
     {
-        if (ScreenControl.inputVelocity > 0f)
+        if (cameraControll.isNowShaked == true)
+        { targetSlingshotControl.controlState = TargetControlState.targetIsNotMove; }
+
+        else if (ScreenControl.inputVelocity > 0f)
         {
             animationSlingControl.SetAnimationPuling();
             if (isTargetOnEnemy != false)
@@ -319,22 +323,25 @@ struct Projectile
 
 public class DamageHits
 {
-    private int maxNumOfHits;
-    public int numOfCurrentDamageHits;
+    public int maxNumOfHits { get; private set; }
+    public int numOfCurrentDamageHits { get; private set; }
     public static DamageHits instance;
     private CameraControll playerCamera;
+    
 
     public DamageHits(CameraControll setPlayerCamera, int maxHits)
     {
         instance = this;
         playerCamera = setPlayerCamera;
         maxNumOfHits = maxHits;
+        
     }
 
     public void AddHit()
     {
         if (numOfCurrentDamageHits > maxNumOfHits) { return; }
         numOfCurrentDamageHits += 1;
+        VisualDamage.instance.InitDamage();
         playerCamera.InitCameraShake();
     }
 }

@@ -9,7 +9,7 @@ public class ShakeOffset
     private float duration;
     private float halfDuration;
     private float multiplayer = 0f;
-    private float maxMultiplayer = 100f;
+    private float maxMultiplayer = 50f;
 
     private float xVelocity = 0f;
     private float yVelocity = 0f;
@@ -21,12 +21,14 @@ public class ShakeOffset
     private Vector3 initVector;
     public bool isEnd = false;
 
+
     public ShakeOffset(Vector3 initDirection ,float setDuration)
     {
         currentVector = GetVectorNoised();
         duration = setDuration;
         halfDuration = duration / 2f;
         initVector = initDirection;
+        //Debug.Log("Init" + initVector);
     }
 
 
@@ -47,12 +49,12 @@ public class ShakeOffset
 
         if (totalCounter < halfDuration)
         {
-            multiplayer = maxMultiplayer * (Mathf.InverseLerp(0f, halfDuration, totalCounter) / maxMultiplayer);
+            multiplayer = Mathf.InverseLerp(0f, halfDuration, totalCounter);
 
         }
         else
         {
-            multiplayer = maxMultiplayer * (Mathf.InverseLerp(duration, halfDuration, totalCounter) / maxMultiplayer);
+            multiplayer = Mathf.InverseLerp(duration, halfDuration, totalCounter) ;
             
         }
         if (totalCounter > duration)
@@ -63,14 +65,16 @@ public class ShakeOffset
 
     private Vector3 GetVectorNoised()
     {
-        if(totalCounter > duration - 0.15f) { return initVector; }
+        if(totalCounter > duration - 0.2f) { return Vector3.zero; }
 
         float tick = UnityEngine.Random.Range(-100f, 100f);
-        
+        float sign = Mathf.Sign(tick);
+
         Vector3 offsetVector = Vector3.zero;
-        offsetVector.x =  maxMultiplayer * (Mathf.PerlinNoise(tick, 0f) - 0.5f);
-        offsetVector.y =  maxMultiplayer * (Mathf.PerlinNoise(0f, tick) - 0.5f);
-        offsetVector.z =  maxMultiplayer * (Mathf.PerlinNoise(tick, tick) - 0.5f);
+        offsetVector.x = initVector.x + maxMultiplayer * (Mathf.PerlinNoise(tick, 0f) - 0.5f);
+        offsetVector.y = initVector.y + maxMultiplayer * (Mathf.PerlinNoise(0f, tick) - 0.5f);
+        offsetVector.z = initVector.z + maxMultiplayer * (Mathf.PerlinNoise(tick, tick) - 0.5f);
+        Debug.Log("Offset" + offsetVector);
         return offsetVector;
     }
 
@@ -78,10 +82,10 @@ public class ShakeOffset
     {
         AddCounter();
         AddTotalCounter();
-        float x = multiplayer * Mathf.SmoothDampAngle(initVector.x, currentVector.x, ref xVelocity, 0.1f);
-        float y = multiplayer * Mathf.SmoothDampAngle(initVector.y, currentVector.y, ref yVelocity, 0.1f);
-        float z = multiplayer * Mathf.SmoothDampAngle(initVector.z, currentVector.z, ref zVelocity, 0.1f);
-
+        float x = (multiplayer * Mathf.SmoothDampAngle(initVector.x, currentVector.x, ref xVelocity, 1f));
+        float y = (multiplayer * Mathf.SmoothDampAngle(initVector.y, currentVector.y, ref yVelocity, 1f));
+        float z = (multiplayer * Mathf.SmoothDampAngle(initVector.z, currentVector.z, ref zVelocity, 1f));
+        //Debug.Log(new Vector3(x, y, z));
         return new Vector3(x, y, z);
     }
 

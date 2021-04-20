@@ -7,6 +7,8 @@ public class CurrentEnemyControl : MonoBehaviour
     public EnemyMove enemyMove;
     public Transform rigCharecter;
     public EnemyActionCollider playerActionCollider;
+    public Transform rightHandContainer;
+    private GameObject equipedWeapon;
     private Rigidbody currentRigidbody;
     private EnemyAnimation enemyAnimation;
     private Rigidbody[] rigidbodies;
@@ -14,6 +16,8 @@ public class CurrentEnemyControl : MonoBehaviour
     private int enemyLayerMask;
     private Vector3 spawnPos;
     private float explosionForce = 20f;
+
+
     private void Start()
     {
         spawnPos = transform.position;
@@ -24,6 +28,15 @@ public class CurrentEnemyControl : MonoBehaviour
         currentRigidbody = transform.GetComponent<Rigidbody>();
         
     }
+
+    public void EquipWeapon(GameObject weapon)
+    {
+        GameObject instance = Instantiate(weapon);
+        equipedWeapon = instance;
+        instance.transform.rotation = Quaternion.Euler(Vector3.zero);
+        instance.transform.SetParent(rightHandContainer.transform, false);
+    }
+
 
     private void InitRagdoll()
     {
@@ -102,6 +115,7 @@ public class CurrentEnemyControl : MonoBehaviour
     private IEnumerator DisableThisEnemy()
     {
         yield return new WaitForSeconds(4f);
+        Destroy(equipedWeapon);
         Destroy(gameObject);
         yield return null;
     }
