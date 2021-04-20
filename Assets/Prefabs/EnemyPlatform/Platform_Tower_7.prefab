@@ -121,6 +121,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0615d5596dc49c649a93811e65e682f5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  platformController: {fileID: 0}
   objectsToDestroy: {fileID: 8591357809289747826}
   obstacleColider: {fileID: 1582484806657474008}
   pointsToSpawnShooters:
@@ -179,7 +180,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3351e795b7ba59e468de87053274c1cd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sparkles: []
 --- !u!1 &7719906066620456469
 GameObject:
   m_ObjectHideFlags: 0
@@ -193,7 +193,7 @@ GameObject:
   - component: {fileID: 1716131211459132112}
   - component: {fileID: 7079554503106131298}
   - component: {fileID: 3608764751374819367}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: PillarHigh_size_x7_y40_z7_1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -333,7 +333,7 @@ GameObject:
   - component: {fileID: 760859578959834946}
   - component: {fileID: 6167354925883616463}
   - component: {fileID: 6897570140642296559}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: PillarHigh_size_x7_y40_z7
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -441,6 +441,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: SM_Prop_Crate_03 (13)
       objectReference: {fileID: 0}
+    - target: {fileID: 1681651414697798, guid: e082979a473bb914ab8af10a5d754993, type: 3}
+      propertyPath: m_Layer
+      value: 11
+      objectReference: {fileID: 0}
     - target: {fileID: 4315301396323988, guid: e082979a473bb914ab8af10a5d754993, type: 3}
       propertyPath: m_LocalPosition.x
       value: -1.5010004
@@ -515,6 +519,10 @@ PrefabInstance:
     - target: {fileID: 1681651414697798, guid: e082979a473bb914ab8af10a5d754993, type: 3}
       propertyPath: m_Name
       value: SM_Prop_Crate_03 (14)
+      objectReference: {fileID: 0}
+    - target: {fileID: 1681651414697798, guid: e082979a473bb914ab8af10a5d754993, type: 3}
+      propertyPath: m_Layer
+      value: 11
       objectReference: {fileID: 0}
     - target: {fileID: 4315301396323988, guid: e082979a473bb914ab8af10a5d754993, type: 3}
       propertyPath: m_LocalPosition.x
@@ -591,6 +599,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: SM_Prop_Crate_03 (9)
       objectReference: {fileID: 0}
+    - target: {fileID: 1681651414697798, guid: e082979a473bb914ab8af10a5d754993, type: 3}
+      propertyPath: m_Layer
+      value: 11
+      objectReference: {fileID: 0}
     - target: {fileID: 4315301396323988, guid: e082979a473bb914ab8af10a5d754993, type: 3}
       propertyPath: m_LocalPosition.x
       value: -0.7000003
@@ -665,6 +677,10 @@ PrefabInstance:
     - target: {fileID: 1681651414697798, guid: e082979a473bb914ab8af10a5d754993, type: 3}
       propertyPath: m_Name
       value: SM_Prop_Crate_03 (12)
+      objectReference: {fileID: 0}
+    - target: {fileID: 1681651414697798, guid: e082979a473bb914ab8af10a5d754993, type: 3}
+      propertyPath: m_Layer
+      value: 11
       objectReference: {fileID: 0}
     - target: {fileID: 4315301396323988, guid: e082979a473bb914ab8af10a5d754993, type: 3}
       propertyPath: m_LocalPosition.x
@@ -741,6 +757,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: SM_Prop_Crate_03 (10)
       objectReference: {fileID: 0}
+    - target: {fileID: 1681651414697798, guid: e082979a473bb914ab8af10a5d754993, type: 3}
+      propertyPath: m_Layer
+      value: 11
+      objectReference: {fileID: 0}
     - target: {fileID: 4315301396323988, guid: e082979a473bb914ab8af10a5d754993, type: 3}
       propertyPath: m_LocalPosition.x
       value: -0.9750004
@@ -816,6 +836,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: SM_Prop_Crate_03 (15)
       objectReference: {fileID: 0}
+    - target: {fileID: 1681651414697798, guid: e082979a473bb914ab8af10a5d754993, type: 3}
+      propertyPath: m_Layer
+      value: 11
+      objectReference: {fileID: 0}
     - target: {fileID: 4315301396323988, guid: e082979a473bb914ab8af10a5d754993, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0.16799974
@@ -890,6 +914,10 @@ PrefabInstance:
     - target: {fileID: 1681651414697798, guid: e082979a473bb914ab8af10a5d754993, type: 3}
       propertyPath: m_Name
       value: SM_Prop_Crate_03 (11)
+      objectReference: {fileID: 0}
+    - target: {fileID: 1681651414697798, guid: e082979a473bb914ab8af10a5d754993, type: 3}
+      propertyPath: m_Layer
+      value: 11
       objectReference: {fileID: 0}
     - target: {fileID: 4315301396323988, guid: e082979a473bb914ab8af10a5d754993, type: 3}
       propertyPath: m_LocalPosition.x

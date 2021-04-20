@@ -18,7 +18,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 4294967295
+  m_StaticEditorFlags: 0
   m_IsActive: 1
 --- !u!4 &6219991573099859642
 Transform:
@@ -207,7 +207,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3351e795b7ba59e468de87053274c1cd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sparkles: []
 --- !u!1 &2291858936267739024
 GameObject:
   m_ObjectHideFlags: 0
@@ -226,7 +225,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 4294967295
+  m_StaticEditorFlags: 0
   m_IsActive: 1
 --- !u!4 &3482721788789359859
 Transform:
@@ -336,7 +335,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 4294967295
+  m_StaticEditorFlags: 0
   m_IsActive: 1
 --- !u!4 &848746779041663984
 Transform:
@@ -446,7 +445,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 4294967295
+  m_StaticEditorFlags: 0
   m_IsActive: 1
 --- !u!4 &4754152152985638620
 Transform:
@@ -588,7 +587,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 4294967295
+  m_StaticEditorFlags: 0
   m_IsActive: 1
 --- !u!4 &4340279936986402730
 Transform:
@@ -698,7 +697,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 4294967295
+  m_StaticEditorFlags: 0
   m_IsActive: 1
 --- !u!4 &6492381164948853017
 Transform:
@@ -836,6 +835,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0615d5596dc49c649a93811e65e682f5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  platformController: {fileID: 0}
   objectsToDestroy: {fileID: 5602292145778960602}
   obstacleColider: {fileID: 1582484806657474008}
   pointsToSpawnShooters:
@@ -891,7 +891,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 4294967295
+  m_StaticEditorFlags: 0
   m_IsActive: 1
 --- !u!4 &7848158672509473188
 Transform:

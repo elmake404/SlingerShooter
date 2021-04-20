@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class ObjectsToDestroy : MonoBehaviour
 {
-    public GameObject[] sparkles;
+    
     private Rigidbody[] rigidbodies;
     private bool isDestroyed = false;
     private TowerControl towerControl;
@@ -19,6 +19,8 @@ public class ObjectsToDestroy : MonoBehaviour
     {
         if (isDestroyed == true) { return; }
         isDestroyed = true;
+        towerControl.platformController.AddTowerToCrushed();
+
         towerControl.MakeTowerDestroyed(sourceExplosion);
         
         for (int i = 0; i < rigidbodies.Length; i++)

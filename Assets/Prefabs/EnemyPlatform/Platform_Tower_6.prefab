@@ -13,12 +13,12 @@ GameObject:
   - component: {fileID: 8039216031966750071}
   - component: {fileID: 632404094783961282}
   - component: {fileID: 2802490662247281043}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: GroundSmallGrey_size_x5_y_0.5_z5
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 4294967295
+  m_StaticEditorFlags: 0
   m_IsActive: 1
 --- !u!4 &5123015112343059658
 Transform:
@@ -123,12 +123,12 @@ GameObject:
   - component: {fileID: 5001342385843394943}
   - component: {fileID: 3822590261372309289}
   - component: {fileID: 7975461324699496181}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: TriangleBigGrey_size_x5_y5_z10
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 4294967295
+  m_StaticEditorFlags: 0
   m_IsActive: 1
 --- !u!4 &7976551318395355782
 Transform:
@@ -263,12 +263,12 @@ GameObject:
   - component: {fileID: 8468537849563185983}
   - component: {fileID: 4982138174526825027}
   - component: {fileID: 3856860725569362961}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: WallLongGrey_size_x1_y5_z13 (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 4294967295
+  m_StaticEditorFlags: 0
   m_IsActive: 1
 --- !u!4 &3097105546494325917
 Transform:
@@ -417,12 +417,12 @@ GameObject:
   - component: {fileID: 2231848785030451990}
   - component: {fileID: 5885145148425368201}
   - component: {fileID: 6167684485300024770}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: WallBooleanWindow_size_x1_y5_z13
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 4294967295
+  m_StaticEditorFlags: 0
   m_IsActive: 1
 --- !u!4 &8647975017736509853
 Transform:
@@ -527,12 +527,12 @@ GameObject:
   - component: {fileID: 2361764852591791205}
   - component: {fileID: 3699042475537074774}
   - component: {fileID: 1458767943284656568}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: WallLongGrey_size_x1_y5_z14
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 4294967295
+  m_StaticEditorFlags: 0
   m_IsActive: 1
 --- !u!4 &2038832896649271124
 Transform:
@@ -637,12 +637,12 @@ GameObject:
   - component: {fileID: 4651215060206161449}
   - component: {fileID: 4170916582325769275}
   - component: {fileID: 1406359338304361117}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: WallLongGrey_size_x1_y5_z16
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 4294967295
+  m_StaticEditorFlags: 0
   m_IsActive: 1
 --- !u!4 &9182088975667882445
 Transform:
@@ -747,12 +747,12 @@ GameObject:
   - component: {fileID: 3178662681650186556}
   - component: {fileID: 971117443035332569}
   - component: {fileID: 2801002339629066707}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: WallLongGrey_size_x1_y5_z12
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 4294967295
+  m_StaticEditorFlags: 0
   m_IsActive: 1
 --- !u!4 &1460965155408848961
 Transform:
@@ -891,12 +891,12 @@ GameObject:
   - component: {fileID: 6757047026831490592}
   - component: {fileID: 258850153066534273}
   - component: {fileID: 2554250823208394225}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: WallBooleanRactangleGrey_size_x1_y5_z12
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 4294967295
+  m_StaticEditorFlags: 0
   m_IsActive: 1
 --- !u!4 &6350231657544453445
 Transform:
@@ -1000,12 +1000,12 @@ GameObject:
   - component: {fileID: 3098026211597234067}
   - component: {fileID: 8756162591107736146}
   - component: {fileID: 6890131302038528830}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: RampVeryLow_size_x2.5_y5_z5
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 4294967295
+  m_StaticEditorFlags: 0
   m_IsActive: 1
 --- !u!4 &4396762954201835441
 Transform:
@@ -1094,12 +1094,12 @@ GameObject:
   - component: {fileID: 4975136122596024143}
   - component: {fileID: 4165916717444852867}
   - component: {fileID: 3676400411713694526}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: WallCurvedOrange_size_x6_y5_z7
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 4294967295
+  m_StaticEditorFlags: 0
   m_IsActive: 1
 --- !u!4 &525836418418120321
 Transform:
@@ -1237,6 +1237,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0615d5596dc49c649a93811e65e682f5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  platformController: {fileID: 0}
   objectsToDestroy: {fileID: 8591357809289747826}
   obstacleColider: {fileID: 1582484806657474008}
   pointsToSpawnShooters:
@@ -1259,12 +1260,12 @@ GameObject:
   - component: {fileID: 6252099830511575562}
   - component: {fileID: 1635548775388419163}
   - component: {fileID: 8559529049850269587}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: RampVeryLow_size_x2.5_y5_z7
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 4294967295
+  m_StaticEditorFlags: 0
   m_IsActive: 1
 --- !u!4 &612637632032920442
 Transform:
@@ -1423,7 +1424,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3351e795b7ba59e468de87053274c1cd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sparkles: []
 --- !u!1 &5390555218884158899
 GameObject:
   m_ObjectHideFlags: 0
@@ -1437,12 +1437,12 @@ GameObject:
   - component: {fileID: 8843581504457214552}
   - component: {fileID: 2150109867761180908}
   - component: {fileID: 6750438927550306103}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: WallLongGrey_size_x1_y5_z15
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 4294967295
+  m_StaticEditorFlags: 0
   m_IsActive: 1
 --- !u!4 &1723872845745568633
 Transform:
@@ -1547,12 +1547,12 @@ GameObject:
   - component: {fileID: 2414220859401517130}
   - component: {fileID: 525686484443769447}
   - component: {fileID: 4582369476451496084}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: WallDoorStrechedGrey_size_x1_y5_z7
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 4294967295
+  m_StaticEditorFlags: 0
   m_IsActive: 1
 --- !u!4 &6212927057126647553
 Transform:
@@ -1658,12 +1658,12 @@ GameObject:
   - component: {fileID: 6595440422205976099}
   - component: {fileID: 8147312524000567093}
   - component: {fileID: 3458218528837716458}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: PlatformHoleEnterence_size_x8_y0.5_z8
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 4294967295
+  m_StaticEditorFlags: 0
   m_IsActive: 1
 --- !u!4 &6911479860889990954
 Transform:
@@ -1768,12 +1768,12 @@ GameObject:
   - component: {fileID: 6273582543569817795}
   - component: {fileID: 9016883508907027269}
   - component: {fileID: 8384006469447036368}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: RampVeryLow_size_x2.5_y5_z6
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 4294967295
+  m_StaticEditorFlags: 0
   m_IsActive: 1
 --- !u!4 &6056693103005035367
 Transform:
@@ -1878,12 +1878,12 @@ GameObject:
   - component: {fileID: 2528674196503771682}
   - component: {fileID: 8327832221308816467}
   - component: {fileID: 2174157976458698552}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: PlatformHoleEnterence_size_x8_y0.5_z9
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 4294967295
+  m_StaticEditorFlags: 0
   m_IsActive: 1
 --- !u!4 &1425830475588955067
 Transform:
@@ -1988,12 +1988,12 @@ GameObject:
   - component: {fileID: 4519580932639304097}
   - component: {fileID: 2081437562060407541}
   - component: {fileID: 2089933123785597888}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: WallCurvedOrange_size_x6_y5_z6
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 4294967295
+  m_StaticEditorFlags: 0
   m_IsActive: 1
 --- !u!4 &4146378402292728174
 Transform:
@@ -2098,12 +2098,12 @@ GameObject:
   - component: {fileID: 7492349809311593581}
   - component: {fileID: 5580808666979151416}
   - component: {fileID: 6604156869597339103}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: WallBooleanWindow_size_x1_y5_z12
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 4294967295
+  m_StaticEditorFlags: 0
   m_IsActive: 1
 --- !u!4 &3248265970854553216
 Transform:
@@ -2238,12 +2238,12 @@ GameObject:
   - component: {fileID: 5206511597594936547}
   - component: {fileID: 1115212211891218296}
   - component: {fileID: 9648891010813081}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: GroundSmallOrange_size_x5_y_0.5_z5
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 4294967295
+  m_StaticEditorFlags: 0
   m_IsActive: 1
 --- !u!4 &3581349207230225947
 Transform:
@@ -2348,12 +2348,12 @@ GameObject:
   - component: {fileID: 3641412603909272093}
   - component: {fileID: 3160881470467551598}
   - component: {fileID: 7538211096445904629}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: WallLongGrey_size_x1_y5_z13
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 4294967295
+  m_StaticEditorFlags: 0
   m_IsActive: 1
 --- !u!4 &3105514510375466971
 Transform:
@@ -2516,6 +2516,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: SM_Prop_Crate_03 (12)
       objectReference: {fileID: 0}
+    - target: {fileID: 1681651414697798, guid: e082979a473bb914ab8af10a5d754993, type: 3}
+      propertyPath: m_Layer
+      value: 11
+      objectReference: {fileID: 0}
     - target: {fileID: 4315301396323988, guid: e082979a473bb914ab8af10a5d754993, type: 3}
       propertyPath: m_LocalPosition.x
       value: -0.9810004
@@ -2590,6 +2594,10 @@ PrefabInstance:
     - target: {fileID: 1681651414697798, guid: e082979a473bb914ab8af10a5d754993, type: 3}
       propertyPath: m_Name
       value: SM_Prop_Crate_03 (10)
+      objectReference: {fileID: 0}
+    - target: {fileID: 1681651414697798, guid: e082979a473bb914ab8af10a5d754993, type: 3}
+      propertyPath: m_Layer
+      value: 11
       objectReference: {fileID: 0}
     - target: {fileID: 4315301396323988, guid: e082979a473bb914ab8af10a5d754993, type: 3}
       propertyPath: m_LocalPosition.x
@@ -2666,6 +2674,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: SM_Prop_Crate_03 (11)
       objectReference: {fileID: 0}
+    - target: {fileID: 1681651414697798, guid: e082979a473bb914ab8af10a5d754993, type: 3}
+      propertyPath: m_Layer
+      value: 11
+      objectReference: {fileID: 0}
     - target: {fileID: 4315301396323988, guid: e082979a473bb914ab8af10a5d754993, type: 3}
       propertyPath: m_LocalPosition.x
       value: -0.26800013
@@ -2740,6 +2752,10 @@ PrefabInstance:
     - target: {fileID: 1681651414697798, guid: e082979a473bb914ab8af10a5d754993, type: 3}
       propertyPath: m_Name
       value: SM_Prop_Crate_03 (9)
+      objectReference: {fileID: 0}
+    - target: {fileID: 1681651414697798, guid: e082979a473bb914ab8af10a5d754993, type: 3}
+      propertyPath: m_Layer
+      value: 11
       objectReference: {fileID: 0}
     - target: {fileID: 4315301396323988, guid: e082979a473bb914ab8af10a5d754993, type: 3}
       propertyPath: m_LocalPosition.x

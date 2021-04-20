@@ -11,6 +11,8 @@ public class PlatformController : MonoBehaviour
     public TowerControl[] towerControl;
     public Collider[] barrelsColliderControl;
     private Queue<Transform> queueSpawnPoints;
+    private bool isAllEnemyDead = false;
+    private int numOfCrusedTowers = 0;
     [HideInInspector] public ChangePlatformManager changePlatformManager;
     [HideInInspector] public CameraControll playerCamera;
     [HideInInspector] public FlowField currentFlowField;
@@ -56,10 +58,38 @@ public class PlatformController : MonoBehaviour
         yield return null;
     }
 
-    public void TimeToLeavePlatform()
+    public void AddTowerToCrushed()
     {
+        numOfCrusedTowers += 1;
+
+        if (GetIsAllTowersCrushed() & isAllEnemyDead == true)
+        {
+            TimeToLeavePlatform();
+        }
+
+    }
+    public void SetAllEnemyDead()
+    {
+        isAllEnemyDead = true;
+
+        if (GetIsAllTowersCrushed() & isAllEnemyDead == true)
+        {
+            TimeToLeavePlatform();
+        }
+    }
+
+    private bool GetIsAllTowersCrushed()
+    {
+        if (numOfCrusedTowers >= towerControl.Length)
+        { return true; }
+        else
+        { return false; }
+    }
+
+    private void TimeToLeavePlatform()
+    {
+
         changePlatformManager.GiveCommandToPlayer();
-        
     }
     private void InitTowers()
     {

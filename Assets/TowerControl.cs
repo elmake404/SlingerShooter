@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class TowerControl : MonoBehaviour
 {
+    [HideInInspector] public PlatformController platformController;
     public ObjectsToDestroy objectsToDestroy;
     public Collider obstacleColider;
     public Transform[] pointsToSpawnShooters;
@@ -15,7 +16,9 @@ public class TowerControl : MonoBehaviour
     void Start()
     {
         spawnedEnemies = new List<CurrentEnemyShootControl>();
+        platformController = transform.parent.GetComponent<PlatformController>();
         spawnEnemyCoroutine = StartCoroutine(SpawnEnemyShooter());
+
     }
 
     public void MakeTowerDestroyed(Vector3 sourceExplosion)

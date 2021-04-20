@@ -266,6 +266,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0615d5596dc49c649a93811e65e682f5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  platformController: {fileID: 0}
   objectsToDestroy: {fileID: 7143283062305111057}
   obstacleColider: {fileID: 4181023103139776029}
   pointsToSpawnShooters:
@@ -1020,7 +1021,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3351e795b7ba59e468de87053274c1cd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sparkles: []
 --- !u!1 &3989130852032178741
 GameObject:
   m_ObjectHideFlags: 0

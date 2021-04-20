@@ -105,7 +105,7 @@ public class EnemyController : MonoBehaviour
         numOfDeadEnemies += 1;
         if (numOfSpawnEnemies == numOfDeadEnemies)
         {
-            platformController.TimeToLeavePlatform();
+            platformController.SetAllEnemyDead();
         }
         //Debug.Log("AddEnemyToDeadList");
     }
