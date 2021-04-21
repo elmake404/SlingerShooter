@@ -16,6 +16,7 @@ public class CameraControll : MonoBehaviour
     private Vector3 velocity;
     private Vector3 savedForvard;
     private float xRotate;
+    private float yRotate;
     private float maxSpeed = 20f;
     private float damping = 10f;
     public PlayerController playerController;
@@ -84,7 +85,7 @@ public class CameraControll : MonoBehaviour
         isNowShaked = true;
         cameraState = CameraState.cameraShake;
         Vector3 currentRotation = new Vector3(transform.eulerAngles.x, xRotate, transform.eulerAngles.z);
-        newShake = new ShakeOffset(currentRotation, 0.5f);
+        newShake = new ShakeOffset(currentRotation, 0.3f);
         
     }
 
@@ -107,8 +108,10 @@ public class CameraControll : MonoBehaviour
     private void RotateCamera()
     {
         Vector3 targetRay = targetSlingshotControl.directionRayTarget.direction;
-        xRotate = Mathf.Atan2(targetRay.x, transform.forward.z) * Mathf.Rad2Deg;
-        transform.localRotation = Quaternion.Euler(0f, xRotate / 2, 0f);
+        xRotate = Mathf.Atan2(targetRay.x, transform.forward.z) * Mathf.Rad2Deg;  
+        yRotate = Mathf.Atan2(targetRay.y, transform.forward.z) * Mathf.Rad2Deg;  
+        
+        transform.localRotation = Quaternion.Euler(-yRotate / 1.8f, xRotate / 1.2f, 0f);
         
     }
     

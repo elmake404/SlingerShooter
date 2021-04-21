@@ -74,7 +74,7 @@ public class ShakeOffset
         offsetVector.x = initVector.x + maxMultiplayer * (Mathf.PerlinNoise(tick, 0f) - 0.5f);
         offsetVector.y = initVector.y + maxMultiplayer * (Mathf.PerlinNoise(0f, tick) - 0.5f);
         offsetVector.z = initVector.z + maxMultiplayer * (Mathf.PerlinNoise(tick, tick) - 0.5f);
-        Debug.Log("Offset" + offsetVector);
+        //Debug.Log("Offset" + offsetVector);
         return offsetVector;
     }
 

@@ -25,10 +25,11 @@ public class TargetSlingshotControl : MonoBehaviour
     private Vector3 initialPos;
     private float speedDecreased = 5f;
     private Color currentColor;
+    private float sensivity;
 
     private void Start()
     {
-        
+        sensivity = Screen.width * 0.04f;
         targetImage = GetComponent<Image>();
         rectTransform = GetComponent<RectTransform>();
         InitializeTarget();
@@ -79,7 +80,9 @@ public class TargetSlingshotControl : MonoBehaviour
 
     private void MoveTarget()
     {
-        rectTransform.position += new Vector3(ScreenControl.inputDirection.x, ScreenControl.inputDirection.y, 0f)  * Time.deltaTime * ScreenControl.inputVelocity/speedDecreased;
+        rectTransform.position += new Vector3(ScreenControl.inputDirection.x, ScreenControl.inputDirection.y, 0f) * Time.deltaTime * sensivity;
+        //Debug.Log(ScreenControl.inputDirection);
+        //Debug.Log(ScreenControl.inputVelocity);
         //rectTransform.position = Vector3.MoveTowards(rectTransform.position, initialPos, 300f*Time.deltaTime);
     }
 

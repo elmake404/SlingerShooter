@@ -21,7 +21,7 @@ public class VisualDamage : MonoBehaviour
     {
         if (currentScreenDamage != null) 
         {
-            Debug.Log("StopCoroutine");
+            //Debug.Log("StopCoroutine");
             StopCoroutine(currentScreenDamage);
         }
 

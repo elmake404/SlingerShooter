@@ -43,6 +43,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 45e14abced3acc04cba4482a5a3b29f3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  roadPathMat: {fileID: 2100000, guid: c5b6b73edebe462498068a6a1688b69a, type: 2}
   currentEnemyController: {fileID: 0}
   platformsController:
   - {fileID: 0}

@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class ChangePlatformManager : MonoBehaviour
 {
+    public Material roadPathMat;
     [HideInInspector] public EnemyController currentEnemyController;
     public List<PlatformController> platformsController;
     [HideInInspector] public PlayerController playerController;
@@ -78,10 +79,13 @@ public class ChangePlatformManager : MonoBehaviour
     {
         GameObject newMeshedSpline = new GameObject();
         MeshFilter meshFilter = newMeshedSpline.AddComponent<MeshFilter>();
-        newMeshedSpline.AddComponent<MeshRenderer>();
+        MeshRenderer meshRenderer = newMeshedSpline.AddComponent<MeshRenderer>();
 
         pointsForPath = CatmulSpline.GetEquidistantPoints(0.5f, GetAllPointsRoad());
         meshFilter.mesh = SplineMesh.GetGeneratedMesh(pointsForPath, 1f);
+        meshRenderer.material = roadPathMat;
+        meshRenderer.material.SetTextureScale("_MainTex", new Vector2(1, pointsForPath.Count/3));
+
         Vector3 offset = Vector3.zero;
         offset.y = 0.1f;
         newMeshedSpline.transform.position += offset;

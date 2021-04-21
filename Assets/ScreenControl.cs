@@ -11,6 +11,7 @@ public class ScreenControl : MonoBehaviour
     public static Vector2 inputDirection = Vector2.zero;
     public static Vector2 inputVectorFromStart;
     private Vector2 startVector;
+    private bool isTouch = false;
 
     private void Update()
     {
@@ -20,7 +21,13 @@ public class ScreenControl : MonoBehaviour
         }
         if (Input.GetMouseButton(0))
         {
-            inputDirection = new Vector2(Input.mousePosition.x, Input.mousePosition.y) - previousDeltaPos;
+            inputDirection = new Vector2(Input.mousePosition.x, Input.mousePosition.y);
+            if (isTouch == false)
+            {
+                previousDeltaPos = inputDirection;
+                isTouch = true;
+            }
+            inputDirection -= previousDeltaPos;
             inputVelocity = Vector2.Distance(Vector2.zero, previousDeltaPos);
             inputVectorVelocity = new Vector2(Input.mousePosition.x, Input.mousePosition.y) - previousDeltaPos;
             previousDeltaPos = new Vector2(Input.mousePosition.x, Input.mousePosition.y);
@@ -29,6 +36,7 @@ public class ScreenControl : MonoBehaviour
         }
         if (Input.GetMouseButtonUp(0))
         {
+            isTouch = false;
             previousDeltaPos = Vector2.zero;
             inputVelocity = 0f;
             inputDirection = Vector2.zero;
