@@ -11,7 +11,6 @@ public class CatmulSpline : MonoBehaviour
     private void Start()
     {
         points = new List<Transform>(pointsToSpline);
-        //MakeSpline();
     }
 
     public Vector3 GetSplinePoint(float t)
@@ -42,12 +41,6 @@ public class CatmulSpline : MonoBehaviour
     {
         points.Add(endPoint);
         currentLength = (float)points.Count - 3f;
-
-        /*for (float t = 0f; t < (float)generatedNewPoint.Count - 3f; t += 0.1f)
-        {
-            Vector3 pos = GetSplinePoint(t);
-            Debug.DrawRay(pos, Vector3.up, Color.green, Mathf.Infinity);
-        }*/
     }
 
     public static List<Vector3> GetEquidistantPoints(float spacing ,List<Transform> points)
@@ -57,7 +50,6 @@ public class CatmulSpline : MonoBehaviour
         Vector3 previousPoint = points[0].position;
         float dstLastEquidPoint = 0f;
         float lengthArrayPoints = (float)points.Count - 4f;
-        Debug.Log("Length Array Points " + lengthArrayPoints);
         float t = 0f;
 
         while (t < lengthArrayPoints)
@@ -98,9 +90,6 @@ public class CatmulSpline : MonoBehaviour
         float q2 = 3.0f * ttt - 5.0f * tt + 2.0f;
         float q3 = -3.0f * ttt + 4.0f * tt + t;
         float q4 = ttt - tt;
-
-        //Debug.Log(p0 + " " + p1 + " " + p2 + " " + p3 + "Length " + points.Count);
-
 
         float tx = 0.5f * (points[p0].position.x * q1 + points[p1].position.x * q2 + points[p2].position.x * q3 + points[p3].position.x * q4);
         float tz = 0.5f * (points[p0].position.z * q1 + points[p1].position.z * q2 + points[p2].position.z * q3 + points[p3].position.z * q4);

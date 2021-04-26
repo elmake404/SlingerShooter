@@ -943,6 +943,7 @@ GameObject:
   m_Component:
   - component: {fileID: 470684}
   - component: {fileID: 13708414}
+  - component: {fileID: 184005787268104676}
   m_Layer: 0
   m_Name: Body_33_punk_D
   m_TagString: Untagged
@@ -1029,6 +1030,21 @@ SkinnedMeshRenderer:
     m_Center: {x: -0.06254876, y: 0.024890244, z: 0.000000059604645}
     m_Extent: {x: 0.5167996, y: 0.2744351, z: 0.7707152}
   m_DirtyAABB: 0
+--- !u!114 &184005787268104676
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 161836}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6f3286489486710458a68eebd2634693, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  skinnedMesh: {fileID: 13708414}
+  fireParticlesInstance: {fileID: 115116, guid: 402cfc0892ef54047b74d53d5a560238,
+    type: 3}
 --- !u!1 &169940
 GameObject:
   m_ObjectHideFlags: 0
@@ -1331,12 +1347,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7c0b0b9ce5bf211419db07f9b7767fe9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  enemyMesh: {fileID: 184005787268104676}
   spawnParticles: {fileID: 147642, guid: 685c97d007af49549b239b56b6d2000a, type: 3}
   bulletParticles: {fileID: 193226, guid: ed28e53c93fc7d2449d7c68bb8409223, type: 3}
   enemyRig: {fileID: 179022}
   actionCollider: {fileID: 5608686016448271245}
   pointShoot: {fileID: 3801998220768322616}
   playerCamera: {fileID: 0}
+  isDead: 0
 --- !u!114 &6670227096252581796
 MonoBehaviour:
   m_ObjectHideFlags: 0

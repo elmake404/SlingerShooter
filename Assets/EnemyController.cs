@@ -16,6 +16,8 @@ public class EnemyController : MonoBehaviour
     private List<int> enemiesThatWantFight;
     private int numOfSpawnEnemies = 5;
     private int numOfDeadEnemies = 0;
+    private float timeToSpawn = 2f;
+    private Transform lastTransform;
 
     private void Start()
     {
@@ -26,6 +28,12 @@ public class EnemyController : MonoBehaviour
         platformController = transform.parent.GetComponent<PlatformController>();
         playerCamera = platformController.playerCamera;
         targetCell = platformController.gridController.targetCell;
+
+        if (platformController.GetNumberOfSpawnPoints() == 1)
+        {
+            timeToSpawn += 2f;
+        }
+
         StartCoroutine(PeriodicSpawnEnemy());
     }
 

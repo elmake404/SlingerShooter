@@ -7,9 +7,12 @@ public class ChangePlatformManager : MonoBehaviour
     public Material roadPathMat;
     [HideInInspector] public EnemyController currentEnemyController;
     public List<PlatformController> platformsController;
+    public CanvasManager canvasManager;
     [HideInInspector] public PlayerController playerController;
     private int currentPlatformIndex;
     private List<Vector3> pointsForPath;
+    private bool isFinish = false;
+    
 
     private void Awake()
     {
@@ -23,6 +26,7 @@ public class ChangePlatformManager : MonoBehaviour
         platformsController[0].enabled = true;
         platformsController[0].changePlatformManager = this;
         currentPlatformIndex = 0;
+
         GetFirstPointAtNextPlatform();
         GeneraMeshedSplineObject();
     }
@@ -36,7 +40,14 @@ public class ChangePlatformManager : MonoBehaviour
 
     public void GiveCommandToPlayer()
     {
-        if (platformsController.Count-1 < currentPlatformIndex + 1) { return; }
+        //if (platformsController.Count <= 1) { return; }
+        if (isFinish == true) { return; }
+        if (platformsController.Count-1 < currentPlatformIndex + 1) 
+        {
+            isFinish = true;
+            canvasManager.InitLevelComplete();
+            return;
+        }
         Transform endPoint = GetFirstPointAtNextPlatform();
         platformsController[currentPlatformIndex].currentSpline.MakeSpline(endPoint);
         playerController.currentSpline = platformsController[currentPlatformIndex].currentSpline;
@@ -46,6 +57,7 @@ public class ChangePlatformManager : MonoBehaviour
     
     private Transform GetFirstPointAtNextPlatform()
     {
+        if (platformsController.Count <= 1) { return null; }
         return platformsController[currentPlatformIndex + 1].GetComponentInChildren<CatmulSpline>().transform.GetChild(1);
     }
 
@@ -77,14 +89,17 @@ public class ChangePlatformManager : MonoBehaviour
 
     private void GeneraMeshedSplineObject()
     {
+        if (platformsController.Count <= 1) { return; }
         GameObject newMeshedSpline = new GameObject();
         MeshFilter meshFilter = newMeshedSpline.AddComponent<MeshFilter>();
         MeshRenderer meshRenderer = newMeshedSpline.AddComponent<MeshRenderer>();
 
+        meshRenderer.shadowCastingMode = UnityEngine.Rendering.ShadowCastingMode.Off;
         pointsForPath = CatmulSpline.GetEquidistantPoints(0.5f, GetAllPointsRoad());
         meshFilter.mesh = SplineMesh.GetGeneratedMesh(pointsForPath, 1f);
         meshRenderer.material = roadPathMat;
         meshRenderer.material.SetTextureScale("_MainTex", new Vector2(1, pointsForPath.Count/3));
+        
 
         Vector3 offset = Vector3.zero;
         offset.y = 0.1f;

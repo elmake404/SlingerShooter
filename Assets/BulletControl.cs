@@ -20,7 +20,7 @@ public class BulletControl : MonoBehaviour
 
     private void MoveBullet()
     {
-        Vector3 nextPos = Vector3.MoveTowards(transform.position, targetPoint, 50f * Time.deltaTime);
+        Vector3 nextPos = Vector3.MoveTowards(transform.position, targetPoint, 20f * Time.deltaTime);
         transform.position = nextPos;
 
         if (Vector3.Distance(nextPos, targetPoint) < 0.1f)

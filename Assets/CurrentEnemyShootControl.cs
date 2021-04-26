@@ -11,6 +11,7 @@ public enum EnemyShooterState
 
 public class CurrentEnemyShootControl : MonoBehaviour
 {
+    public EnemyMesh enemyMesh;
     public GameObject spawnParticles;
     public GameObject bulletParticles;
     public GameObject enemyRig;
@@ -96,6 +97,7 @@ public class CurrentEnemyShootControl : MonoBehaviour
         //enemyMove.moveState = EnemyMoveState.enemyDeath;
         EnableRagdoll();
         actionCollider.enabled = false;
+        enemyMesh.SetFireOnEnemy(sourceExplosion);
         AddExplosionForceToBody(sourceExplosion);
         StartCoroutine(DisableThisEnemy());
     }
@@ -103,6 +105,7 @@ public class CurrentEnemyShootControl : MonoBehaviour
     private IEnumerator DisableThisEnemy()
     {
         yield return new WaitForSeconds(4f);
+        enemyMesh.DestroyParticles();
         Destroy(gameObject);
         yield return null;
     }

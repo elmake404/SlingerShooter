@@ -25,7 +25,9 @@ public class PlayerController : MonoBehaviour
     public TargetSlingshotControl targetSlingshotControl;
     public AnimationSlingControl animationSlingControl;
     public GameObject projectileBullet;
+    public CanvasManager canvasManager;
     public bool isPlayerDead = false;
+    public GameObject impactParticlesOnEnemy;
     [HideInInspector] public PlayerState playerState;
     [HideInInspector] public Camera mainCamera;
     [HideInInspector] public CatmulSpline currentSpline;
@@ -45,6 +47,7 @@ public class PlayerController : MonoBehaviour
     private int numOfMaxEnemyHits = 5;
     private DamageHits damageHits;
     private CameraControll cameraControll;
+    private Vector3 shootPos;
     public ShootingOn shootingOn = ShootingOn.empty;
 
     private delegate void ShootingVariants();
@@ -120,6 +123,7 @@ public class PlayerController : MonoBehaviour
     private void InitPlayerDeath()
     {
         if (isPlayerDead == true) { return; }
+        StartCoroutine(DelayShowCanvas(2f));
         playerState = PlayerState.playerIsDead;
         cameraControll.InitStatePlayerDeath();
     }
@@ -142,6 +146,7 @@ public class PlayerController : MonoBehaviour
             {
                 currentTargetedObject = raycastHit.transform.gameObject;
                 shootingOn = ShootingOn.enemy;
+                shootPos = raycastHit.point;
                 isTargetOnEnemy = true;
             }
 
@@ -149,6 +154,7 @@ public class PlayerController : MonoBehaviour
             {
                 isTargetOnEnemy = true;
                 shootingOn = ShootingOn.enemyShooter;
+                shootPos = raycastHit.point;
                 currentTargetedObject = raycastHit.transform.gameObject;
             }
 
@@ -183,6 +189,7 @@ public class PlayerController : MonoBehaviour
     {
         if (currentTargetedObject == null) { return; }
         //Debug.Log(currentTargetedEnemy.transform.name);
+        InitImpactParticles();
         CurrentEnemyControl currentEnemyControl = currentTargetedObject.transform.GetComponent<CurrentEnemyControl>();
         currentEnemyControl.InitDeathThisGuy(targetSlingshotControl.directionRayTarget);
     }
@@ -306,7 +313,30 @@ public class PlayerController : MonoBehaviour
         Destroy(projectileList[index].projectile);
         projectileList.RemoveAt(index);
     }
+    private void InitImpactParticles()
+    {
+        GameObject particles = Instantiate(impactParticlesOnEnemy);
+        particles.transform.position = shootPos;
+        float duration = particles.GetComponent<ParticleSystem>().main.duration;
+        StartCoroutine(DeleteParticles(particles, duration));
+    }
+
+    private IEnumerator DeleteParticles(GameObject particles, float duration)
+    {
+        yield return new WaitForSeconds(duration);
+        Destroy(particles);
+        yield return null;
+    }
+
+    private IEnumerator DelayShowCanvas(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        canvasManager.InitRestartMenu();
+        yield return null;
+    }
 }
+
+
 
 
 struct Projectile
@@ -342,6 +372,8 @@ public class DamageHits
         if (numOfCurrentDamageHits > maxNumOfHits) { return; }
         numOfCurrentDamageHits += 1;
         VisualDamage.instance.InitDamage();
-        playerCamera.InitCameraShake();
     }
+
+
+
 }

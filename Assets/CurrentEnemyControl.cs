@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class CurrentEnemyControl : MonoBehaviour
 {
+    public EnemyMesh enemyMesh;
     public EnemyMove enemyMove;
     public Transform rigCharecter;
     public EnemyActionCollider playerActionCollider;
@@ -16,7 +17,7 @@ public class CurrentEnemyControl : MonoBehaviour
     private int enemyLayerMask;
     private Vector3 spawnPos;
     private float explosionForce = 20f;
-
+    
 
     private void Start()
     {
@@ -26,7 +27,12 @@ public class CurrentEnemyControl : MonoBehaviour
         DisableRagdoll();
         enemyLayerMask = 1 << LayerMask.NameToLayer("EnemyRagdoll");
         currentRigidbody = transform.GetComponent<Rigidbody>();
-        
+        //enemyMesh.SetMesh();
+    }
+
+    private void FixedUpdate()
+    {
+        //enemyMesh.SetMesh();
     }
 
     public void EquipWeapon(GameObject weapon)
@@ -89,6 +95,7 @@ public class CurrentEnemyControl : MonoBehaviour
         enemyMove.moveState = EnemyMoveState.enemyDeath;
         EnableRagdoll();
         playerActionCollider.DisableActionCollider();
+        enemyMesh.SetFireOnEnemy(posExplosion);
         AddExplosionForceToBody(posExplosion);
         StartCoroutine(DisableThisEnemy());
     }
@@ -108,13 +115,14 @@ public class CurrentEnemyControl : MonoBehaviour
     {
         for (int i = 0; i < rigidbodies.Length; i++)
         {
-            rigidbodies[i].AddExplosionForce(explosionForce, posExplosion, 4f, 20f, ForceMode.Impulse);
+            rigidbodies[i].AddExplosionForce(explosionForce, posExplosion, 10f, 20f, ForceMode.Impulse);
         }
     }
     
     private IEnumerator DisableThisEnemy()
     {
         yield return new WaitForSeconds(4f);
+        enemyMesh.DestroyParticles();
         Destroy(equipedWeapon);
         Destroy(gameObject);
         yield return null;

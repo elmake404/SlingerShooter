@@ -25,6 +25,11 @@ public class PlatformController : MonoBehaviour
         StartCoroutine(InitEnablePlatform());
     }
 
+    public int GetNumberOfSpawnPoints()
+    {
+        return pointsToSpawn.Count;
+    }
+
     public Transform GetSpawnPoint()
     {
         Transform returnTransform = queueSpawnPoints.Peek();

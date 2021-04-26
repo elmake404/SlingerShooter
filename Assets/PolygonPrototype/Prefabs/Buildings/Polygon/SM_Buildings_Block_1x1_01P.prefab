@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 4883762814713038}
   - component: {fileID: 33139500247623812}
   - component: {fileID: 23926487519972606}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: SM_Buildings_Block_1x1_01P
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -27,7 +27,7 @@ Transform:
   m_GameObject: {fileID: 1570628789228942}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -0, y: 0, z: 0}
-  m_LocalScale: {x: 4.93471, y: 3.6277807, z: 4.3259397}
+  m_LocalScale: {x: 3.0600839, y: 3.6277807, z: 3.05448}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0

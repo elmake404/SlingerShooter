@@ -6,7 +6,7 @@ public class BarrelExplosionControl : MonoBehaviour
 {
     public GameObject particles;
     public LayerMask layerMask;
-    private float radiusExplosion = 4f;
+    private float radiusExplosion = 8f;
     private bool isExplosion = false;
     
 

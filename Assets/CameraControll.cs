@@ -6,7 +6,7 @@ public enum CameraState
 {
     normal,
     playerIsDead,
-    cameraShake
+    //cameraShake
 }
 public class CameraControll : MonoBehaviour
 {
@@ -24,7 +24,6 @@ public class CameraControll : MonoBehaviour
     private bool isPlayerDead;
     private Rigidbody cameraRigidbody;
     private SphereCollider cameraCollider;
-    private ShakeOffset newShake;
     public bool isNowShaked = false;
 
     private void Start()
@@ -43,7 +42,6 @@ public class CameraControll : MonoBehaviour
     }
 
 
-
     private void CurrentCameraState(CameraState cameraState)
     {
         switch (cameraState)
@@ -55,9 +53,6 @@ public class CameraControll : MonoBehaviour
             case CameraState.playerIsDead:
                 break;
 
-            case CameraState.cameraShake:
-                CameraShake();
-                break;
         }
     }
 
@@ -76,34 +71,6 @@ public class CameraControll : MonoBehaviour
         cameraRigidbody.AddTorque(-transform.right + 3f * transform.forward, ForceMode.Impulse );
     }
 
-    public void InitCameraShake()
-    {
-        if (newShake != null) 
-        {
-            newShake = null;
-        }
-        isNowShaked = true;
-        cameraState = CameraState.cameraShake;
-        Vector3 currentRotation = new Vector3(transform.eulerAngles.x, xRotate, transform.eulerAngles.z);
-        newShake = new ShakeOffset(currentRotation, 0.3f);
-        
-    }
-
-    private void CameraShake()
-    {
-        if (newShake.isEnd == true) 
-        {
-            cameraState = CameraState.normal;
-            newShake = null;
-            isNowShaked = false;
-            //Debug.Log("NormalCamera");
-            return;
-        }
-        Vector3 offset = newShake.GetSmoothedEulerAngles();
-        //Debug.Log(offset);
-        transform.localRotation = Quaternion.Euler(offset);
-
-    }
 
     private void RotateCamera()
     {

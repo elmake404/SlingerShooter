@@ -49,7 +49,6 @@ public class TargetSlingshotControl : MonoBehaviour
     private void Update()
     {
         SelectActionFromInput(controlState);
-        //  Debug.Log(currentColor);
     }
 
     public void SelectActionFromInput(TargetControlState targetControlState)
@@ -81,9 +80,6 @@ public class TargetSlingshotControl : MonoBehaviour
     private void MoveTarget()
     {
         rectTransform.position += new Vector3(ScreenControl.inputDirection.x, ScreenControl.inputDirection.y, 0f) * Time.deltaTime * sensivity;
-        //Debug.Log(ScreenControl.inputDirection);
-        //Debug.Log(ScreenControl.inputVelocity);
-        //rectTransform.position = Vector3.MoveTowards(rectTransform.position, initialPos, 300f*Time.deltaTime);
     }
 
     private void GenerateRayFromTarget()
