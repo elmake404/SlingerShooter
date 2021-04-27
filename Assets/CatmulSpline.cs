@@ -65,7 +65,7 @@ public class CatmulSpline : MonoBehaviour
                 equidistantPoints.Add(newEquidistantPoint);
                 dstLastEquidPoint = overShootDst;
                 previousPoint = newEquidistantPoint;
-                Debug.DrawRay(newEquidistantPoint, Vector3.up, Color.green, Mathf.Infinity);
+                //Debug.DrawRay(newEquidistantPoint, Vector3.up, Color.green, Mathf.Infinity);
             }
             previousPoint = pointOnCurve;
         }

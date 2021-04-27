@@ -31,12 +31,18 @@ public class CanvasManager : MonoBehaviour
 
     private void RestartScene()
     {
+        if (restartInDead.activeSelf == true)
+        {
+            FacebookManager.Instance.LevelFail(currentSceneBuildIndex);
+        }
         SceneManager.LoadScene(currentSceneBuildIndex);
+        
     }
 
     public void InitRestartMenu()
     {
         restartInDead.SetActive(true);
+        
     }
 
     public void InitLevelComplete()
@@ -47,9 +53,11 @@ public class CanvasManager : MonoBehaviour
 
     private void LoadNextLevel()
     {
+        FacebookManager.Instance.LevelWin(currentSceneBuildIndex);
+
         if (currentSceneBuildIndex + 1 >= allSceneCount)
         {
-            SceneManager.LoadScene(0);
+            SceneManager.LoadScene(1);
         }
         else
         {
@@ -68,22 +76,22 @@ public class CanvasManager : MonoBehaviour
     {
         int saved = PlayerPrefs.GetInt(savedStatus.key_numOfCompleted);
         saved += 1;
-        Debug.Log("AddAndSaveNum  " + saved);
         PlayerPrefs.SetInt(savedStatus.key_numOfCompleted, saved);
     }
 
     private void AddAndSaveSceneIndex()
     {
         int saved = PlayerPrefs.GetInt(savedStatus.key_lastindexScene);
+        YandexCustomEvent.LevelFinish(saved);
         if (saved + 1 >= currentSceneBuildIndex)
         {
-            saved = 0;
+            saved = 1;
         }
         else
         {
             saved += 1;
         }
-        Debug.Log("AddAndSaveSceneIndex  " + saved);
+        YandexCustomEvent.LevelStart(saved);
         PlayerPrefs.SetInt(savedStatus.key_lastindexScene, saved);
     }
 
