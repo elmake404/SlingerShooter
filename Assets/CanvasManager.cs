@@ -83,7 +83,7 @@ public class CanvasManager : MonoBehaviour
     {
         int saved = PlayerPrefs.GetInt(savedStatus.key_lastindexScene);
         YandexCustomEvent.LevelFinish(saved);
-        if (saved + 1 >= currentSceneBuildIndex)
+        if (saved + 1 > allSceneCount)
         {
             saved = 1;
         }

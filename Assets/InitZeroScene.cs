@@ -9,6 +9,7 @@ public class InitZeroScene : MonoBehaviour
     {
         LoadGameScene();
         FacebookManager.Instance.GameStart();
+        //PlayerPrefs.DeleteAll();
     }
 
     private void LoadGameScene()
@@ -16,6 +17,13 @@ public class InitZeroScene : MonoBehaviour
         int indexScene = PlayerPrefs.GetInt("0");
         int numLevels = PlayerPrefs.GetInt("1");
         YandexCustomEvent.LevelStart(numLevels);
+        if (indexScene == 0)
+        {
+            indexScene += 1;
+            PlayerPrefs.SetInt("0", indexScene);
+            PlayerPrefs.SetInt("1", indexScene);
+        }
+        //Debug.Log("numLevel" + indexScene);
         SceneManager.LoadScene(indexScene);
     }
 
